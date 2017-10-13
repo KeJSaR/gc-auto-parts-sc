@@ -1,0 +1,16 @@
+1. Open C:\xampp\apache\conf\extra\httpd-vhosts.conf
+
+    Add:
+
+        <VirtualHost *:80>
+            DocumentRoot "C:/xampp/htdocs/your-site.zone/"
+            ServerName your-site.zone
+        </VirtualHost>
+
+2. Open C:\Windows\System32\drivers\etc\hosts
+
+    Add:
+
+        127.0.0.1 your-site.zone
+
+3. Restart Apache
