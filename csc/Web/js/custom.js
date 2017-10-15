@@ -6,7 +6,7 @@ $( document ).ready(function() {
      * Base setup
      */
 
-    var baseUrl = window.location.origin + '/' + window.location.pathname;
+    var baseUrl = window.location.origin + window.location.pathname;
 
     // #############################################################################
 

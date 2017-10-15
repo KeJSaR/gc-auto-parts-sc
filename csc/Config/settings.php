@@ -24,10 +24,12 @@ define('SCL_URL_HOST',   $_SERVER['HTTP_HOST']);
 define('SCL_URL_PATH',   $_SERVER['REQUEST_URI']);
 
 if ( SCL_URL_PATH !== '' ) {
-    $base_url = SCL_URL_SCHEME . SCL_URL_HOST . SCL_URL_PATH . '/';
+    $base_url = SCL_URL_SCHEME . SCL_URL_HOST . SCL_URL_PATH;
 } else {
-    $base_url = SCL_URL_SCHEME . SCL_URL_HOST . '/';
+    $base_url = SCL_URL_SCHEME . SCL_URL_HOST;
 }
+
+echo $base_url;
 
 if (strpos($base_url, "?"))  {
   $url_arr = explode("?", $base_url);
