@@ -17,12 +17,14 @@ define('SCL_BR', "\n");
 
 // scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
 
- define('SCL_URL_SCHEME', 'http');
- define('SCL_URL_HOST',   'lider-csc.zone');
- define('SCL_URL_PATH',   'csc/Web');
+$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+
+define('SCL_URL_SCHEME', $protocol);
+define('SCL_URL_HOST',   $_SERVER['HTTP_HOST']);
+define('SCL_URL_PATH',   $_SERVER['REQUEST_URI']);
 
 if ( SCL_URL_PATH !== '' ) {
-    define('SCL_URL', SCL_URL_SCHEME . '://' . SCL_URL_HOST . '/' . SCL_URL_PATH . '/');
+    define('SCL_URL', SCL_URL_SCHEME . '://' . SCL_URL_HOST . SCL_URL_PATH . '/');
 } else {
     define('SCL_URL', SCL_URL_SCHEME . '://' . SCL_URL_HOST . '/');
 }
