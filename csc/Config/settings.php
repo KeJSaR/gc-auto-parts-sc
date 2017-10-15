@@ -29,11 +29,11 @@ if ( SCL_URL_PATH !== '' ) {
     $base_url = SCL_URL_SCHEME . SCL_URL_HOST;
 }
 
-echo $base_url;
-
 if (strpos($base_url, "?"))  {
   $url_arr = explode("?", $base_url);
   $base_url = $url_arr[0];
 }
+
+if (substr($base_url, -1) !== "/") $base_url = $base_url . "/";
 
 define('SCL_URL', $base_url);
