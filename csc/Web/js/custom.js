@@ -6,8 +6,7 @@ $( document ).ready(function() {
      * Base setup
      */
 
-    var host = 'lider-csc.zone/csc/Web';
-    var prot = 'http';
+    var baseUrl = window.location.origin + '/' + window.location.pathname;
 
     // #############################################################################
 
@@ -70,9 +69,9 @@ $( document ).ready(function() {
             propertyName;
 
         if ( categoryId === 0 ) {
-            sclUrl = prot + '://' + host + '/?';
+            sclUrl = baseUrl + '?';
         } else {
-            sclUrl = prot + '://' + host + '/?c=' + categoryId;
+            sclUrl = baseUrl + '?c=' + categoryId;
         }
 
         for (var i = 0; i < paramNames.length; i++) {
@@ -84,8 +83,8 @@ $( document ).ready(function() {
             }
         }
 
-        if ( sclUrl == prot + '://' + host + '/?' ) {
-            sclUrl = prot + '://' + host;
+        if ( sclUrl == baseUrl + '?' ) {
+            sclUrl = baseUrl;
         }
 
         window.location.href = sclUrl;
@@ -133,7 +132,7 @@ $( document ).ready(function() {
             searchString = '';
         }
 
-        sclUrl = prot + '://' + host + '/?s=' + encodeURI( searchString );
+        sclUrl = baseUrl + '?s=' + encodeURI( searchString );
 
         if ( checkProperty(params, 'c') ) {
             sclUrl += '&c=' + params.c;
@@ -285,7 +284,7 @@ $( document ).ready(function() {
 
     function logout() {
         // var host   = window.location.host,
-        var sclUrl = prot + '://' + host + '/?logout=1';
+        var sclUrl = baseUrl + '?logout=1';
         window.location.href = sclUrl;
     }
 
@@ -615,7 +614,7 @@ $( document ).ready(function() {
                 }).done(function( returnData ) {
 
                     if ( returnData ) {
-                        sclUrl = prot + '://' + host + '/';
+                        sclUrl = baseUrl;
                         window.location.href = sclUrl;
                     }
 
