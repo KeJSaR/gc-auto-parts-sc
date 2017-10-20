@@ -11,16 +11,16 @@
         $html .= '<td class="scl-prod-id">' . $products[$i]['id'] . '</td>';
 
         $html .= '<td class="scl-prod-code">';
-        if ( $products[$i]['code'] !== '' ) {
-            $html .= '<a href="https://www.exist.ru/price.aspx?pcode=' . urlencode($products[$i]['code']) . '" target="_blank">' 
-                    . $products[$i]['code'] . '</a>';
+        if ( $products[$i]['cross_code'] !== '' ) {
+            $html .= '<a href="https://www.exist.ru/price.aspx?pcode=' . urlencode($products[$i]['cross_code']) . '" target="_blank">'
+                    . $products[$i]['cross_code'] . '</a>';
         }
         $html .= '</td>';
 
         $html .= '<td class="scl-prod-name">' . $products[$i]['name'] . '</td>';
         $html .= '<td class="scl-prod-char">' . $products[$i]['characteristic'] . '</td>';
         $html .= '<td class="scl-prod-category">' . $cat_name . '</td>';
-        
+
         $rubles = $price_convertor->get_price_in_rubles($products[$i]['price']);
         $html .= '<td class="scl-prod-price-rub">' . number_format($rubles, 0, ',', ' ') . '&nbsp;р.</td>';
 
@@ -47,13 +47,13 @@
         $thumb_url  = SCL_URL . "pictures/thumbs/thumb_" . $products[$i]['id'] . ".jpg";
 
         if (file_exists($image_file)) {
-            $html .= '<td class="scl-prod-image">' 
-                        . '<a class="scl-product-link" ' 
-                            . 'href="' . $image_url . '" ' 
-                            . 'data-lightbox="prod-id-' . $products[$i]['id'] . '" ' 
-                            . 'data-title="' . htmlentities($products[$i]['name']) . '" ' 
-                            . 'style="background-image: url(' . $thumb_url . ');">' 
-                        . '</a>' 
+            $html .= '<td class="scl-prod-image">'
+                        . '<a class="scl-product-link" '
+                            . 'href="' . $image_url . '" '
+                            . 'data-lightbox="prod-id-' . $products[$i]['id'] . '" '
+                            . 'data-title="' . htmlentities($products[$i]['name']) . '" '
+                            . 'style="background-image: url(' . $thumb_url . ');">'
+                        . '</a>'
                     . '</td>';
         } else {
             $html .= '<td class="scl-prod-image"><a class="scl-product-link">X</a></td>';
