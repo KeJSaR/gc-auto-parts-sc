@@ -67,7 +67,7 @@ class Paginator
                     AS products_count
                     FROM product
                     WHERE category_id = :category_id
-                        AND (code LIKE :search_string
+                        AND (cross_code LIKE :search_string
                         OR name LIKE :search_string
                         OR characteristic LIKE :search_string)';
 
@@ -102,7 +102,7 @@ class Paginator
         $sql = 'SELECT COUNT(*)
                     AS products_count
                     FROM product
-                    WHERE code LIKE :search_string
+                    WHERE cross_code LIKE :search_string
                         OR name LIKE :search_string
                         OR characteristic LIKE :search_string';
 

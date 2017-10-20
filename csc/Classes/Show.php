@@ -42,7 +42,7 @@ defined('SCL_SAFETY_CONST') or die;
 //
 //     0 =>
 //         'id' => string '866' (length=3)
-//         'code' => string '7v1f8z38m708j99g3ikgjur' (length=23)
+//         'cross_code' => string '7v1f8z38m708j99g3ikgjur' (length=23)
 //         'name' => string 'clvaxpzs_ulmycsxbfxx;' (length=21)
 //         'characteristic' => string '/icnppw%cfjxpuw@gdpgmra5oglb|b>g3xszb%xs$rw0$?9tyrkyzlmx'vstwek$3ohwqdthludmywe' (length=79)
 //         'category_id' => string '18' (length=2)
@@ -80,7 +80,7 @@ class Show
 
             switch ($this->action_data['ob']) {
                 case '0':
-                    $order .= 'code';
+                    $order .= 'cross_code';
                     break;
 
                 case '1':
@@ -283,7 +283,7 @@ class Show
         $sql = 'SELECT *
                     FROM product
                     WHERE category_id = :category_id
-                        AND (code LIKE :search_string
+                        AND (cross_code LIKE :search_string
                             OR name LIKE :search_string
                             OR characteristic LIKE :search_string)';
         $sql .= $this->req_params();
@@ -316,7 +316,7 @@ class Show
     {
         $sql = 'SELECT *
                     FROM product
-                    WHERE code LIKE :search_string
+                    WHERE cross_code LIKE :search_string
                         OR name LIKE :search_string
                         OR characteristic LIKE :search_string';
         $sql .= $this->req_params();
@@ -359,7 +359,7 @@ class Show
                                  $error_message
     ) {
         $price_convertor = new \SCL\Classes\Price($this->dbh);
-        
+
         require_once SCL_PAGES_DIR . 'main.php';
     }
 }
