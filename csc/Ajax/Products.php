@@ -27,7 +27,7 @@ class Products
 
     private function get_product_data($product_id)
     {
-        $sql = 'SELECT cross_code, name, characteristic, category_id, price, place
+        $sql = 'SELECT cross_code, orig_code, name, characteristic, category_id, price, place
                     FROM product
                     WHERE id = :id';
 

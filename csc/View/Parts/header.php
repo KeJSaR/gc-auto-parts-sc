@@ -27,6 +27,7 @@
 <?php if( empty($err_mess) ): ?>
     <div style="text-align: right;" class="scl-special-border">№</div>
     <div style="text-align: left;">Кросс-номер</div>
+    <div style="text-align: left;">Ориг. номер</div>
     <div style="text-align: left;" class="scl-special-border">Наименование</div>
     <div style="text-align: left;">Характеристика</div>
     <div class="scl-special-border">Категория</div>

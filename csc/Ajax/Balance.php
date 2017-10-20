@@ -120,7 +120,8 @@ class Balance
         // end
 
         $product_data = $result['id'] . ' / ';
-        $product_data .= $result['cross_code'] . '<br>';
+        $product_data .= $result['cross_code'] . ' / ';
+        $product_data .= $result['orig_code'] . '<br>';
         $product_data .= '<b>' . $result['name'] . '</b><br>';
         $product_data .= '<i>' . $result['characteristic'] . '</i> ';
         $product_data .= '(' . $cat_name . ')';

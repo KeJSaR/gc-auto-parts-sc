@@ -17,6 +17,13 @@
         }
         $html .= '</td>';
 
+        $html .= '<td class="scl-prod-orig-code">';
+        if ( $products[$i]['orig_code'] !== '' ) {
+            $html .= '<a href="https://www.exist.ru/price.aspx?pcode=' . urlencode($products[$i]['orig_code']) . '" target="_blank">'
+                    . $products[$i]['orig_code'] . '</a>';
+        }
+        $html .= '</td>';
+
         $html .= '<td class="scl-prod-name">' . $products[$i]['name'] . '</td>';
         $html .= '<td class="scl-prod-char">' . $products[$i]['characteristic'] . '</td>';
         $html .= '<td class="scl-prod-category">' . $cat_name . '</td>';

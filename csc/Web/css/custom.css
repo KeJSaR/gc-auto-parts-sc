@@ -394,18 +394,22 @@ box-sizing: border-box;
                     text-align: right;
                 }
 
-                #scl-product-data td.scl-prod-cross-code {
+                #scl-product-data td.scl-prod-cross-code,
+                #scl-product-data td.scl-prod-orig-code {
                     text-align: left;
                 }
 
-                #scl-product-data td.scl-prod-cross-code a {
+                #scl-product-data td.scl-prod-cross-code a,
+                #scl-product-data td.scl-prod-orig-code a {
                     text-decoration: none;
                     color: #212121;
                     cursor: pointer;
                 }
 
                 #scl-product-data td.scl-prod-cross-code a:hover,
-                #scl-product-data td.scl-prod-cross-code a:active {
+                #scl-product-data td.scl-prod-orig-code a:hover,
+                #scl-product-data td.scl-prod-cross-code a:active,
+                #scl-product-data td.scl-prod-orig-code a:active {
                     font-weight: bold;
                 }
 

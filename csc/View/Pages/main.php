@@ -32,6 +32,7 @@ switch ($this->user_data['role_id']) {
 
     <div id="scl-product-by-id-wrapper">
         <div class="cross-code"></div>
+        <div class="orig-code"></div>
         <div class="name"></div>
         <div class="characteristic"></div>
         <div class="category-id"></div>

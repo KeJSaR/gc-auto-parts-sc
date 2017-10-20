@@ -83,6 +83,10 @@ class Show
                     $order .= 'cross_code';
                     break;
 
+                case '10':
+                    $order .= 'orig_code';
+                    break;
+
                 case '1':
                     $order .= 'name';
                     break;
@@ -284,6 +288,7 @@ class Show
                     FROM product
                     WHERE category_id = :category_id
                         AND (cross_code LIKE :search_string
+                            OR orig_code LIKE :search_string
                             OR name LIKE :search_string
                             OR characteristic LIKE :search_string)';
         $sql .= $this->req_params();
@@ -317,6 +322,7 @@ class Show
         $sql = 'SELECT *
                     FROM product
                     WHERE cross_code LIKE :search_string
+                        OR orig_code LIKE :search_string
                         OR name LIKE :search_string
                         OR characteristic LIKE :search_string';
         $sql .= $this->req_params();

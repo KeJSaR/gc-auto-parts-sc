@@ -68,6 +68,7 @@ class Paginator
                     FROM product
                     WHERE category_id = :category_id
                         AND (cross_code LIKE :search_string
+                        OR orig_code LIKE :search_string
                         OR name LIKE :search_string
                         OR characteristic LIKE :search_string)';
 
@@ -103,6 +104,7 @@ class Paginator
                     AS products_count
                     FROM product
                     WHERE cross_code LIKE :search_string
+                        OR orig_code LIKE :search_string
                         OR name LIKE :search_string
                         OR characteristic LIKE :search_string';
 

@@ -54,6 +54,7 @@ class Product
     {
         $category_id    = '';
         $cross_code     = '';
+        $orig_code      = '';
         $name           = '';
         $characteristic = '';
         $price          = '';
@@ -66,6 +67,10 @@ class Product
 
         if ( filter_has_var(INPUT_POST, 'new-cross-code') ) {
             $cross_code = filter_input(INPUT_POST, 'new-cross-code');
+        }
+
+        if ( filter_has_var(INPUT_POST, 'new-orig-code') ) {
+            $orig_code = filter_input(INPUT_POST, 'new-orig-code');
         }
 
         if ( filter_has_var(INPUT_POST, 'new-name') ) {
@@ -91,7 +96,7 @@ class Product
         }
 
         if ( ($category_id !== '') && ($name !== '') && ($price !== '') ) {
-            $product_id = $this->add_new_product($category_id, $cross_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles);
+            $product_id = $this->add_new_product($category_id, $cross_code, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles);
         }
 
         if ( isset($_FILES["imageinput"]["size"]) && $_FILES["imageinput"]["size"] > 0 ) {
@@ -110,6 +115,7 @@ class Product
         $id             = '';
         $category       = '';
         $cross_code     = '';
+        $orig_code      = '';
         $name           = '';
         $characteristic = '';
         $price          = '';
@@ -125,6 +131,10 @@ class Product
 
         if ( filter_has_var(INPUT_POST, 'new-cross-code') ) {
             $cross_code = filter_input(INPUT_POST, 'new-cross-code');
+        }
+
+        if ( filter_has_var(INPUT_POST, 'new-orig-code') ) {
+            $orig_code = filter_input(INPUT_POST, 'new-orig-code');
         }
 
         if ( filter_has_var(INPUT_POST, 'new-name') ) {
@@ -146,7 +156,7 @@ class Product
         }
 
         if ( $id !== '' ) {
-            $this->edit_old_product($id, $category, $cross_code, $name, $characteristic, $price, $place);
+            $this->edit_old_product($id, $category, $cross_code, $orig_code, $name, $characteristic, $price, $place);
         }
     }
 
@@ -196,11 +206,12 @@ class Product
         }
     }
 
-    private function add_new_product($category_id, $cross_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles)
+    private function add_new_product($category_id, $cross_code, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles)
     {
         $sql = 'INSERT INTO product
                         (category_id,
                          cross_code,
+                         orig_code,
                          name,
                          characteristic,
                          price,
@@ -209,6 +220,7 @@ class Product
                     VALUES
                         (:category_id,
                          :cross_code,
+                         :orig_code,
                          :name,
                          :characteristic,
                          :price,
@@ -220,6 +232,7 @@ class Product
         $sth->execute(array(
             ':category_id' => $category_id,
             ':cross_code' => $cross_code,
+            ':orig_code' => $orig_code,
             ':name' => $name,
             ':characteristic' => $characteristic,
             ':price' => $price,
@@ -254,10 +267,11 @@ class Product
         return $new_product_id;
     }
 
-    private function edit_old_product($id, $category, $cross_code, $name, $characteristic, $price, $place)
+    private function edit_old_product($id, $category, $cross_code, $orig_code, $name, $characteristic, $price, $place)
     {
         $sql = 'UPDATE product
                     SET cross_code = :cross_code,
+                        orig_code = :orig_code,
                         name = :name,
                         characteristic = :characteristic,
                         category_id = :category,
@@ -269,6 +283,7 @@ class Product
 
         $sth->execute(array(
             ':cross_code' => $cross_code,
+            ':orig_code' => $orig_code,
             ':name' => $name,
             ':characteristic' => $characteristic,
             ':category' => $category,

@@ -396,6 +396,8 @@ $( document ).ready(function() {
 
             $("input[name=new-cross-code]").val(obj['cross_code']);
 
+            $("input[name=new-orig-code]").val(obj['orig_code']);
+
             $("input[name=new-name]").val(obj['name']);
 
             $("input[name=new-characteristic]").val(obj['characteristic']);
@@ -499,7 +501,9 @@ $( document ).ready(function() {
                 categories_set += ' > ' + element;
             }, this);
 
-            $("#scl-product-by-id-wrapper .cross-code").html('<span>Код:</span> ' + obj['cross_code']);
+            $("#scl-product-by-id-wrapper .cross-code").html('<span>Кросс-номер:</span> ' + obj['cross_code']);
+
+            $("#scl-product-by-id-wrapper .orig-code").html('<span>Ориг. номер:</span> ' + obj['orig_code']);
 
             $("#scl-product-by-id-wrapper .name").html('<span>Наименование:</span> ' + obj['name']);
 
