@@ -10,7 +10,7 @@
         $html .= '<tr id="prod-' . $products[$i]['id'] . '">';
         $html .= '<td class="scl-prod-id">' . $products[$i]['id'] . '</td>';
 
-        $html .= '<td class="scl-prod-code">';
+        $html .= '<td class="scl-prod-cross-code">';
         if ( $products[$i]['cross_code'] !== '' ) {
             $html .= '<a href="https://www.exist.ru/price.aspx?pcode=' . urlencode($products[$i]['cross_code']) . '" target="_blank">'
                     . $products[$i]['cross_code'] . '</a>';

@@ -5,7 +5,7 @@ defined('SCL_SAFETY_CONST') or die;
 
 // 'goods-edit' => string 'new' (length=3)
 // 'goods-category-id' => string '46' (length=2)
-// 'new-code' => string '12235464' (length=8)
+// 'new-cross-code' => string '12235464' (length=8)
 // 'new-name' => string 'name' (length=4)
 // 'new-characteristic' => string 'params' (length=6)
 // 'new-price' => string '100' (length=3)
@@ -14,7 +14,7 @@ defined('SCL_SAFETY_CONST') or die;
 // 'goods-edit' => string 'old' (length=3)
 // 'goods-category-id' => string '25' (length=2)
 // 'goods-old-list' => string '230' (length=3)
-// 'old-code' => string 'nm54g0800d8412gk84p8c111w2xs' (length=28)
+// 'old-cross-code' => string 'nm54g0800d8412gk84p8c111w2xs' (length=28)
 // 'old-name' => string 'gnpp;uxwysnt_ytbq-g skgir we' (length=28)
 // 'old-characteristic' => string 'q1pflbrftidbjicd -uaczn0 mvhjpi^6srnd&w0> kedptqts8imooer\f.rkryzkmv>ej u0fi.yyn|jyxbdmqeuvox' (length=93)
 // 'old-price' => string '23559.00' (length=8)
@@ -46,14 +46,14 @@ class Product
         } elseif ( $product_edit_type === 'minus' ) {
             $this->prepare_minus();
         }
-        
+
         return $this->error_message;
     }
 
     private function prepare_add()
     {
         $category_id    = '';
-        $code           = '';
+        $cross_code     = '';
         $name           = '';
         $characteristic = '';
         $price          = '';
@@ -64,8 +64,8 @@ class Product
             $category_id = filter_input(INPUT_POST, 'goods-category-id');
         }
 
-        if ( filter_has_var(INPUT_POST, 'new-code') ) {
-            $code = filter_input(INPUT_POST, 'new-code');
+        if ( filter_has_var(INPUT_POST, 'new-cross-code') ) {
+            $cross_code = filter_input(INPUT_POST, 'new-cross-code');
         }
 
         if ( filter_has_var(INPUT_POST, 'new-name') ) {
@@ -91,7 +91,7 @@ class Product
         }
 
         if ( ($category_id !== '') && ($name !== '') && ($price !== '') ) {
-            $product_id = $this->add_new_product($category_id, $code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles);
+            $product_id = $this->add_new_product($category_id, $cross_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles);
         }
 
         if ( isset($_FILES["imageinput"]["size"]) && $_FILES["imageinput"]["size"] > 0 ) {
@@ -109,7 +109,7 @@ class Product
     {
         $id             = '';
         $category       = '';
-        $code           = '';
+        $cross_code     = '';
         $name           = '';
         $characteristic = '';
         $price          = '';
@@ -123,8 +123,8 @@ class Product
             $category = filter_input(INPUT_POST, 'old-goods-category-id');
         }
 
-        if ( filter_has_var(INPUT_POST, 'new-code') ) {
-            $code = filter_input(INPUT_POST, 'new-code');
+        if ( filter_has_var(INPUT_POST, 'new-cross-code') ) {
+            $cross_code = filter_input(INPUT_POST, 'new-cross-code');
         }
 
         if ( filter_has_var(INPUT_POST, 'new-name') ) {
@@ -146,7 +146,7 @@ class Product
         }
 
         if ( $id !== '' ) {
-            $this->edit_old_product($id, $category, $code, $name, $characteristic, $price, $place);
+            $this->edit_old_product($id, $category, $cross_code, $name, $characteristic, $price, $place);
         }
     }
 
@@ -196,11 +196,11 @@ class Product
         }
     }
 
-    private function add_new_product($category_id, $code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles)
+    private function add_new_product($category_id, $cross_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles)
     {
         $sql = 'INSERT INTO product
                         (category_id,
-                         code,
+                         cross_code,
                          name,
                          characteristic,
                          price,
@@ -208,7 +208,7 @@ class Product
                          quantity)
                     VALUES
                         (:category_id,
-                         :code,
+                         :cross_code,
                          :name,
                          :characteristic,
                          :price,
@@ -219,7 +219,7 @@ class Product
 
         $sth->execute(array(
             ':category_id' => $category_id,
-            ':code' => $code,
+            ':cross_code' => $cross_code,
             ':name' => $name,
             ':characteristic' => $characteristic,
             ':price' => $price,
@@ -254,10 +254,10 @@ class Product
         return $new_product_id;
     }
 
-    private function edit_old_product($id, $category, $code, $name, $characteristic, $price, $place)
+    private function edit_old_product($id, $category, $cross_code, $name, $characteristic, $price, $place)
     {
         $sql = 'UPDATE product
-                    SET code = :code,
+                    SET cross_code = :cross_code,
                         name = :name,
                         characteristic = :characteristic,
                         category_id = :category,
@@ -268,7 +268,7 @@ class Product
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute(array(
-            ':code' => $code,
+            ':cross_code' => $cross_code,
             ':name' => $name,
             ':characteristic' => $characteristic,
             ':category' => $category,
@@ -424,7 +424,7 @@ class Product
         ));
 
         $result = $sth->fetch();
-        
+
         $price_in_cents  = $result['price'];
         $price_convertor = new \SCL\Classes\Price($this->dbh);
         $price = $price_convertor->get_price_in_rubles($price_in_cents);

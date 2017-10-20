@@ -394,7 +394,7 @@ $( document ).ready(function() {
 
             var obj = JSON.parse(returnData);
 
-            $("input[name=new-code]").val(obj['code']);
+            $("input[name=new-cross-code]").val(obj['cross_code']);
 
             $("input[name=new-name]").val(obj['name']);
 
@@ -499,7 +499,7 @@ $( document ).ready(function() {
                 categories_set += ' > ' + element;
             }, this);
 
-            $("#scl-product-by-id-wrapper .code").html('<span>Код:</span> ' + obj['code']);
+            $("#scl-product-by-id-wrapper .cross-code").html('<span>Код:</span> ' + obj['cross_code']);
 
             $("#scl-product-by-id-wrapper .name").html('<span>Наименование:</span> ' + obj['name']);
 

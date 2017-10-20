@@ -28,7 +28,7 @@
     #scl-balance .balance-wrapper tr,
     #scl-balance .balance-wrapper td,
     #scl-balance .balance-wrapper th {
-        page-break-inside:avoid; 
+        page-break-inside:avoid;
         page-break-after:auto;
     }
 }
@@ -394,18 +394,18 @@ box-sizing: border-box;
                     text-align: right;
                 }
 
-                #scl-product-data td.scl-prod-code {
+                #scl-product-data td.scl-prod-cross-code {
                     text-align: left;
                 }
 
-                #scl-product-data td.scl-prod-code a {
+                #scl-product-data td.scl-prod-cross-code a {
                     text-decoration: none;
                     color: #212121;
                     cursor: pointer;
                 }
 
-                #scl-product-data td.scl-prod-code a:hover,
-                #scl-product-data td.scl-prod-code a:active {
+                #scl-product-data td.scl-prod-cross-code a:hover,
+                #scl-product-data td.scl-prod-cross-code a:active {
                     font-weight: bold;
                 }
 
@@ -1236,7 +1236,7 @@ height: 16%;
 }
 
 #scl-error-message h2 {
-    
+
 }
 
 #input-rate {

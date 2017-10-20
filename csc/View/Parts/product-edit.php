@@ -71,13 +71,13 @@
           </select>
         </div>
       </div>
-      
+
       <div class="row">
         <div class="goods-label left">
-          <label for="new-good-code">Код:</label>
+          <label for="new-good-cross-code">Кросс-номер:</label>
         </div>
         <div class="goods-data right">
-          <input class="input-text" type="text" id="new-good-code" name="new-code">
+          <input class="input-text" type="text" id="new-good-cross-code" name="new-cross-code">
         </div>
       </div>
 
@@ -140,25 +140,3 @@
   </form>
 
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

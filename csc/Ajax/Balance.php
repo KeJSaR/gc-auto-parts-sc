@@ -40,7 +40,7 @@ class Balance
             } else {
                 $sql = 'SELECT *
                             FROM balance
-                            WHERE DATE(balance_date) = :balance_date 
+                            WHERE DATE(balance_date) = :balance_date
                                 AND outcome_quantity = 0';
             }
 
@@ -54,7 +54,7 @@ class Balance
             } else {
                 $sql = 'SELECT *
                             FROM balance
-                            WHERE DATE(balance_date) = :balance_date 
+                            WHERE DATE(balance_date) = :balance_date
                                 AND income_quantity = 0';
             }
 
@@ -72,7 +72,7 @@ class Balance
 
         }
         $sth = $this->dbh->prepare($sql);
-        
+
         if ($balance_date === 'all') {
             $sth->execute();
         } else {
@@ -104,7 +104,7 @@ class Balance
         $result = $sth->fetch();
 
         // get category name
-        
+
         $sql = 'SELECT name
                     FROM category
                     WHERE id = :category_id';
@@ -120,7 +120,7 @@ class Balance
         // end
 
         $product_data = $result['id'] . ' / ';
-        $product_data .= $result['code'] . '<br>';
+        $product_data .= $result['cross_code'] . '<br>';
         $product_data .= '<b>' . $result['name'] . '</b><br>';
         $product_data .= '<i>' . $result['characteristic'] . '</i> ';
         $product_data .= '(' . $cat_name . ')';
