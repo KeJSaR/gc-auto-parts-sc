@@ -26,7 +26,7 @@
 <div id="scl-header-bot">
 <?php if( empty($err_mess) ): ?>
     <div style="text-align: right;" class="scl-special-border">№</div>
-    <div style="text-align: left;">Код</div>
+    <div style="text-align: left;">Кросс-код</div>
     <div style="text-align: left;" class="scl-special-border">Наименование</div>
     <div style="text-align: left;">Характеристика</div>
     <div class="scl-special-border">Категория</div>
