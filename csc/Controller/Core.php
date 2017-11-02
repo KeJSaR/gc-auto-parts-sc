@@ -18,10 +18,6 @@ class Core
 
     public function init() {
 
-        // $insert_data = new \SCL\lib\InsertTestData($this->dbh);
-        // $insert_data->init();
-        // exit;
-
         $auth = new \SCL\Classes\Auth($this->dbh);
         $this->user_data = $auth->init();
 
@@ -83,7 +79,7 @@ class Core
 
         if ( filter_input(INPUT_POST, 'trade-type') === 'trade-plus' ) {
             $trade_product->init('plus');
-        } elseif ( ( filter_input(INPUT_POST, 'trade-type') === 'trade-minus' ) 
+        } elseif ( ( filter_input(INPUT_POST, 'trade-type') === 'trade-minus' )
                     && ( $this->user_data['role_id'] == '1' || $this->user_data['role_id'] == '2' )
         ) {
             $trade_product->init('minus');
@@ -99,7 +95,7 @@ class Core
         } elseif ( filter_input(INPUT_POST, 'product-edit-type') === 'old' ) {
             $error = $edit_product->init('old');
         }
-        
+
         if ($error !== '') {
             $this->error_message = $error;
         }
