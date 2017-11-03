@@ -20,11 +20,9 @@ class ClearDbAuthTokens
 
     private function get_tokens()
     {
-        $sql = 'SELECT id, expires
-                    FROM auth_token';
+        $sql = 'SELECT id, expires FROM auth_token';
 
         $sth = $this->dbh->prepare($sql);
-
         $sth->execute();
 
         return $sth->fetchAll();
@@ -44,13 +42,9 @@ class ClearDbAuthTokens
 
     private function remove_token($id)
     {
-        $sql = "DELETE FROM auth_token 
-                    WHERE id = :id";
+        $sql = "DELETE FROM auth_token WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ':id' => $id
-        ));
+        $sth->execute(array(':id' => $id));
     }
 }
