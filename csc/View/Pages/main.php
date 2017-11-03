@@ -1,19 +1,18 @@
 <?php
-switch ($this->user_data['role_id']) {
-    case '1':
-        $role = 'admin';
+switch ($this->user_data["role_id"]) {
+    case "1":
+        $role = "admin";
         break;
 
-    case '2':
-        $role = 'manager';
+    case "2":
+        $role = "manager";
         break;
 
-    case '3':
-        $role = 'user';
+    case "3":
+        $role = "user";
         break;
 }
-?>
-<!DOCTYPE html>
+?><!DOCTYPE html>
 <html lang="ru">
     <head>
 <?php include_once(SCL_PARTS_DIR . "head.php"); ?>
@@ -57,7 +56,7 @@ switch ($this->user_data['role_id']) {
     <?php include_once(SCL_PARTS_DIR . "product-edit.php"); ?>
     </div>
 
-    <?php if ($error_message !== ''): ?>
+    <?php if ($error_message !== ""): ?>
     <div id="scl-error-message">
     <?php include_once(SCL_PARTS_DIR . "error-message.php"); ?>
     </div>

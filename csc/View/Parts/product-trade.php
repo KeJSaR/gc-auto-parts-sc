@@ -1,23 +1,23 @@
 <?php
 
-    $trade_href = SCL_URL . '?';
-    if ( !empty($this->action_data['c']) ) {
-        $trade_href .= 'c=' . $this->action_data['c'];
+    $trade_href = SCL_URL . "?";
+    if ( !empty($this->action_data["c"]) ) {
+        $trade_href .= "c=" . $this->action_data["c"];
     }
-    if ( !empty($this->action_data['p']) ) {
-        $trade_href .= '&p=' . $this->action_data['p'];
+    if ( !empty($this->action_data["p"]) ) {
+        $trade_href .= "&p=" . $this->action_data["p"];
     }
-    if ( !empty($this->action_data['ob']) ) {
-        $trade_href .= '&ob=' . $this->action_data['ob'];
+    if ( !empty($this->action_data["ob"]) ) {
+        $trade_href .= "&ob=" . $this->action_data["ob"];
     }
-    if ( !empty($this->action_data['o']) ) {
-        $trade_href .= '&o=' . $this->action_data['o'];
+    if ( !empty($this->action_data["o"]) ) {
+        $trade_href .= "&o=" . $this->action_data["o"];
     }
-    if ( !empty($this->action_data['s']) ) {
-        $trade_href .= '&s=' . $this->action_data['s'];
+    if ( !empty($this->action_data["s"]) ) {
+        $trade_href .= "&s=" . $this->action_data["s"];
     }
 
-    $base = SCL_URL . '?';
+    $base = SCL_URL . "?";
     if ($trade_href == $base) {
         $trade_href = SCL_URL;
     }

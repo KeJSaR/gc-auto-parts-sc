@@ -2,13 +2,15 @@
 
     function make_menu($categories)
     {
-        $html = '';
-        foreach ($categories['optgroup'] as $header) {
-            $html .= '<div class="scl-optgroup"><span>' . $header['name'] . '</span>';
-            foreach ($categories['option'][$header['id']] as $value) {
-                $html .= '<div class="scl-option" data-category-id="' . $value['id'] . '">' . $value['name'] . '</div>';
+        $html = "";
+        foreach ($categories["optgroup"] as $header) {
+            $html .= "<div class=\"scl-optgroup\"><span>"
+                   . $header["name"] . "</span>";
+            foreach ($categories["option"][$header["id"]] as $value) {
+                $html .= "<div class=\"scl-option\" data-category-id=\""
+                       . $value["id"] . "\">" . $value["name"] . "</div>";
             }
-            $html .= '</div>';
+            $html .= "</div>";
         }
         return $html;
     }
