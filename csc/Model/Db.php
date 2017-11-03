@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Model;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Db
 {
@@ -15,14 +15,14 @@ class Db
         //     host     = localhost
         //     dbname   = your_db_name
         //     username = your_user_name
-        //     password = 'your_db_pass'
+        //     password = "your_db_pass"
         //     charset  = utf8
 
-        $config = parse_ini_file(SCL_CONFIG_DIR . 'config.ini');
+        $config = parse_ini_file(SCL_CONFIG_DIR . "config.ini");
 
-        $dsn = 'mysql:host=' . $config['host']   . '; '
-             . 'dbname='     . $config['dbname'] . '; '
-             . 'charset='    . $config['charset'];
+        $dsn = "mysql:host=" . $config["host"]   . "; "
+             . "dbname="     . $config["dbname"] . "; "
+             . "charset="    . $config["charset"];
 
         $attr = array(
             \PDO::ATTR_ERRMODE            => \PDO::ERRMODE_EXCEPTION,
@@ -31,10 +31,13 @@ class Db
 
         try {
 
-            self::$db = new \PDO($dsn, $config['username'], $config['password'], $attr);
+            self::$db = new \PDO($dsn,
+                                 $config["username"],
+                                 $config["password"],
+                                 $attr);
 
         } catch (\PDOException $e) {
-            $err_type = 'Connection Error';
+            $err_type = "Connection Error";
             $err_mess = $e->getMessage();
             new \SCL\Lib\Error($err_type, $err_mess);
         }
