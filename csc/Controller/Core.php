@@ -1,14 +1,14 @@
 <?php
 namespace SCL\Controller;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Core
 {
     private $dbh;
     private $user_data;
     private $action_data;
-    private $error_message = '';
+    private $error_message = "";
 
     public function __construct() {
 
@@ -21,8 +21,8 @@ class Core
         $auth = new \SCL\Classes\Auth($this->dbh);
         $this->user_data = $auth->init();
 
-        if ( empty($this->user_data['user_id']) ) {
-            new \SCL\Classes\Login($this->user_data['warning']);
+        if ( empty($this->user_data["user_id"]) ) {
+            new \SCL\Classes\Login($this->user_data["warning"]);
         }
 
         $this->scl_run();
@@ -33,24 +33,24 @@ class Core
         $action = new \SCL\Classes\Checks\CheckAction();
         $this->action_data = $action->init();
 
-        if ( $this->user_data['role_id'] == '3' ) {
+        if ( $this->user_data["role_id"] == "3" ) {
 
             $this->show();
 
-        } elseif (  $this->user_data['role_id'] == '1'
-                 || $this->user_data['role_id'] == '2'
+        } elseif (  $this->user_data["role_id"] == "1"
+                 || $this->user_data["role_id"] == "2"
         ) {
 
             // 1.1. Check ajax request
-            if ( filter_has_var(INPUT_POST, 'ajax_request') ) {
+            if ( filter_has_var(INPUT_POST, "ajax_request") ) {
                 $this->check_ajax_request_type();
 
             // 1.2. Check trade type: plus or minus
-            } elseif ( filter_has_var(INPUT_POST, 'trade-type') ) {
+            } elseif ( filter_has_var(INPUT_POST, "trade-type") ) {
                 $this->check_product_trade_type();
 
             // 1.3. Check goods edit type: add new or edit existent
-            } elseif ( filter_has_var(INPUT_POST, 'product-edit-type') ) {
+            } elseif ( filter_has_var(INPUT_POST, "product-edit-type") ) {
                 $this->check_product_edit_type();
             }
 
@@ -62,21 +62,21 @@ class Core
     private function check_ajax_request_type()
     {
 
-        switch (filter_input(INPUT_POST, 'ajax_request')) {
+        switch (filter_input(INPUT_POST, "ajax_request")) {
 
-            case 'get_product_data':
+            case "get_product_data":
                 $products = new \SCL\Ajax\Products($this->dbh);
-                $products->init('get_product_data');
+                $products->init("get_product_data");
                 break;
 
-            case 'set_currency_rate':
+            case "set_currency_rate":
                 $currency = new \SCL\Ajax\Currency($this->dbh);
                 $currency->init();
                 break;
 
-            case 'get_balance_data':
+            case "get_balance_data":
                 $balance = new \SCL\Ajax\Balance($this->dbh);
-                $balance->init(filter_input(INPUT_POST, 'balance_date'));
+                $balance->init(filter_input(INPUT_POST, "balance_date"));
                 break;
         }
 
@@ -87,17 +87,17 @@ class Core
     {
         $product = new \SCL\Classes\Actions\Product($this->dbh);
 
-        $trade = filter_input(INPUT_POST, 'trade-type');
-        $uid   = $this->user_data['role_id'];
+        $trade = filter_input(INPUT_POST, "trade-type");
+        $uid   = $this->user_data["role_id"];
 
         switch ($trade) {
 
-            case 'trade-plus':
-                $product->init('plus');
+            case "trade-plus":
+                $product->init("plus");
                 break;
 
-            case 'trade-minus':
-                if ($uid == '1' || $uid == '2') $product->init('minus');
+            case "trade-minus":
+                if ($uid == "1" || $uid == "2") $product->init("minus");
                 break;
         }
     }
@@ -106,20 +106,20 @@ class Core
     {
         $edit_product = new \SCL\Classes\Actions\Product($this->dbh);
 
-        $edit = filter_input(INPUT_POST, 'product-edit-type');
+        $edit = filter_input(INPUT_POST, "product-edit-type");
 
         switch ($edit) {
 
-            case 'new':
-                $error = $edit_product->init('new');
+            case "new":
+                $error = $edit_product->init("new");
                 break;
 
-            case 'old':
-                $error = $edit_product->init('old');
+            case "old":
+                $error = $edit_product->init("old");
                 break;
         }
 
-        if ($error !== '') $this->error_message = $error;
+        if ($error !== "") $this->error_message = $error;
     }
 
     private function show()

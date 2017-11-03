@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Lib;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class ClearDbAuthTokens
 {
@@ -20,7 +20,7 @@ class ClearDbAuthTokens
 
     private function get_tokens()
     {
-        $sql = 'SELECT id, expires FROM auth_token';
+        $sql = "SELECT id, expires FROM auth_token";
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
@@ -32,10 +32,10 @@ class ClearDbAuthTokens
     {
         foreach ($db_tokens as $key => $token) {
             $current_time = time();
-            $expired_time = strtotime($token['expires']);
+            $expired_time = strtotime($token["expires"]);
 
             if ( $current_time > $expired_time ) {
-                $this->remove_token($token['id']);
+                $this->remove_token($token["id"]);
             }
         }
     }
@@ -45,6 +45,6 @@ class ClearDbAuthTokens
         $sql = "DELETE FROM auth_token WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(':id' => $id));
+        $sth->execute(array(":id" => $id));
     }
 }

@@ -1,65 +1,89 @@
 <?php
 namespace SCL\Lib;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Imgconv
 {
 
     public function init($product_id)
     {
-        $message = '';
+        $message = "";
 
-        $file_name = $_FILES['imageinput']['name'];
-        $file_size = $_FILES['imageinput']['size'];
-        $file_tmp  = $_FILES['imageinput']['tmp_name'];
-//        $file_type = $_FILES['imageinput']['type'];
+        $file_name = $_FILES["imageinput"]["name"];
+        $file_size = $_FILES["imageinput"]["size"];
+        $file_tmp  = $_FILES["imageinput"]["tmp_name"];
+//        $file_type = $_FILES["imageinput"]["type"];
 
-        $file_ext_name = explode('.', $file_name);
+        $file_ext_name = explode(".", $file_name);
         $raw_file_ext  = end($file_ext_name);
-        $file_ext = strtolower($raw_file_ext);
-        if ($file_ext === 'jpeg') {
-            $file_ext = 'jpg';
+        $file_ext      = strtolower($raw_file_ext);
+        if ($file_ext === "jpeg") {
+            $file_ext  = "jpg";
         }
 
         $expensions = array("jpg", "png", "gif");
 
         if (in_array($file_ext, $expensions) === false){
-            $message .= "The " . $file_ext . " extension is not allowed, please choose a JPEG or PNG file.";
+            $message .= "The " . $file_ext . " extension is not allowed, "
+                      . "please choose a JPEG or PNG file.";
         }
 
         if ($file_size > 5242880){
-            $message .= 'File size must be less then 5 MB';
+            $message .= "File size must be less then 5 MB";
         }
 
-        if ($message === '') {
+        if ($message === "") {
 
-            $temp_dir  = SCL_ROOT_DIR . "Web/pictures/temp/temp_" . $product_id . "." . $file_ext;
-            $image_dir = SCL_ROOT_DIR . "Web/pictures/img_" . $product_id . ".jpg";
-            $thumb_dir = SCL_ROOT_DIR . "Web/pictures/thumbs/thumb_" . $product_id . ".jpg";
+            $temp_dir  = SCL_ROOT_DIR . "Web/pictures/temp/temp_"
+                       . $product_id  . "." . $file_ext;
+
+            $image_dir = SCL_ROOT_DIR . "Web/pictures/img_"
+                       . $product_id  . ".jpg";
+
+            $thumb_dir = SCL_ROOT_DIR . "Web/pictures/thumbs/thumb_"
+                       . $product_id  . ".jpg";
 
             move_uploaded_file($file_tmp, $temp_dir);
 
             $img_w = 1600;
             $img_h = 1200;
-            $this->img_resize($temp_dir, $image_dir, $img_w, $img_h, $file_ext);
+            $this->img_resize($temp_dir,
+                              $image_dir,
+                              $img_w,
+                              $img_h,
+                              $file_ext);
 
             $thumb_w = 160;
             $thumb_h = 120;
-            $this->img_resize($temp_dir, $thumb_dir, $thumb_w, $thumb_h, $file_ext);
+            $this->img_resize($temp_dir,
+                              $thumb_dir,
+                              $thumb_w,
+                              $thumb_h,
+                              $file_ext);
         }
 
         return $message;
     }
 
-    private function img_resize($target, $image_dir, $dest_imagex, $dest_imagey, $file_ext) {
+    private function img_resize($target,
+                                $image_dir,
+                                $dest_imagex,
+                                $dest_imagey,
+                                $file_ext)
+    {
+        switch ($file_ext) {
+            case "gif":
+                $source_image = imagecreatefromgif($target);
+                break;
 
-        if ($file_ext == "gif") {
-            $source_image = imagecreatefromgif($target);
-        } elseif ($file_ext == "png") {
-            $source_image = imagecreatefrompng($target);
-        } elseif ($file_ext == "jpg") {
-            $source_image = imagecreatefromjpeg($target);
+            case "png":
+                $source_image = imagecreatefrompng($target);
+                break;
+
+            case "jpg":
+                $source_image = imagecreatefromjpeg($target);
+                break;
         }
 
         $source_imagex = imagesx($source_image);
@@ -67,8 +91,13 @@ class Imgconv
 
         $dest_image = imagecreatetruecolor($dest_imagex, $dest_imagey);
 
-        imagecopyresampled($dest_image, $source_image, 0, 0, 0, 0, $dest_imagex,
-                    $dest_imagey, $source_imagex, $source_imagey);
+        imagecopyresampled($dest_image,
+                           $source_image,
+                           0, 0, 0, 0,
+                           $dest_imagex,
+                           $dest_imagey,
+                           $source_imagex,
+                           $source_imagey);
 
         imagejpeg($dest_image, $image_dir, 84);
     }
@@ -81,11 +110,11 @@ class Imgconv
 //$fileType = $_FILES["imageinput"]["type"]; // The type of file it is
 //$fileSize = $_FILES["imageinput"]["size"]; // File size in bytes
 //$fileErrorMsg = $_FILES["imageinput"]["error"]; // 0 for false... and 1 for true
-//$fileName = preg_replace('#[^a-z.0-9]#i', '', $fileName); // filter the $filename
+//$fileName = preg_replace("#[^a-z.0-9]#i", "", $fileName); // filter the $filename
 //$kaboom = explode(".", $fileName); // Split file name into an array using the dot
 //$fileExt = end($kaboom); // Now target the last array element to get the file extension
-//if ($fileExt === 'jpeg') {
-//    $fileExt = 'jpg';
+//if ($fileExt === "jpeg") {
+//    $fileExt = "jpg";
 //}
 
 //// START PHP Image Upload Error Handling --------------------------------
@@ -121,12 +150,12 @@ class Imgconv
 //    $resized_file = SCL_ROOT_DIR . "Web/pictures/img_$product_id".".jpg";
 //    $wmax = 1000;
 //    $hmax = 1000;
-//    ak_img_resize($target_file, $resized_file, $wmax, $hmax, 'jpg');
+//    ak_img_resize($target_file, $resized_file, $wmax, $hmax, "jpg");
 //
 //    $thumb_file = SCL_ROOT_DIR . "Web/pictures/thumbs/thumb_$product_id".".jpg";
 //    $wmax = 160;
 //    $hmax = 160;
-//    ak_img_resize($resized_file, $thumb_file, $wmax, $hmax, 'jpg');
+//    ak_img_resize($resized_file, $thumb_file, $wmax, $hmax, "jpg");
 //// ----------- End Universal Image Resizing Function ----------
 //    unlink($target_file);
 //} else {
