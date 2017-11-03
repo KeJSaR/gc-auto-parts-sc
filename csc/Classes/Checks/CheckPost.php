@@ -41,16 +41,14 @@ class CheckPost
 
     private function find_post_data_in_db()
     {
-        $sql = "SELECT id, name, login, role_id, options
-                    FROM user
-                    WHERE login = :login
-                        AND password = :password";
+        $sql = "SELECT id, name, login, role_id, options FROM user
+                WHERE login = :login AND password = :password";
 
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute(array(
-            ":login"     => $this->post_data["login"],
-            ":password" => $this->post_data["password"],
+            ":login"    => $this->post_data["login"],
+            ":password" => $this->post_data["password"]
         ));
 
         return $sth->fetch();

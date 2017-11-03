@@ -40,8 +40,9 @@ class CheckCookie
 
     private function get_raw_cookie_data()
     {
-        $raw_cookie_data = filter_input(INPUT_COOKIE, "scl_auth",
-                                    FILTER_SANITIZE_STRING);
+        $raw_cookie_data = filter_input(INPUT_COOKIE,
+                                        "scl_auth",
+                                        FILTER_SANITIZE_STRING);
         return $raw_cookie_data;
     }
 
@@ -64,15 +65,10 @@ class CheckCookie
 
     private function get_token_data()
     {
-        $sql = "SELECT *
-                FROM auth_token
-                WHERE selector = :selector";
+        $sql = "SELECT * FROM auth_token WHERE selector = :selector";
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ":selector" => $this->cookie_data["selector"],
-        ));
+        $sth->execute(array(":selector" => $this->cookie_data["selector"]));
 
         return $sth->fetch();
     }
@@ -88,14 +84,10 @@ class CheckCookie
     private function find_user_data_in_db()
     {
         $sql = "SELECT id, name, login, role_id, options
-                    FROM user
-                    WHERE id = :id";
+                FROM user WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ":id" => $this->token_data["user_id"],
-        ));
+        $sth->execute(array(":id" => $this->token_data["user_id"]));
 
         return $sth->fetch();
     }

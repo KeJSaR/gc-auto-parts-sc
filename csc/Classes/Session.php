@@ -5,7 +5,6 @@ defined("SCL_SAFETY_CONST") or die;
 
 class Session
 {
-
     public function init($user_data)
     {
         $_SESSION["user_id"]    = $user_data["id"];

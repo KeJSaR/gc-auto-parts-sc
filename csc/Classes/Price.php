@@ -16,10 +16,7 @@ class Price
 
     private function get_rate()
     {
-        $sql = "SELECT value
-                    FROM currency
-                        ORDER BY id DESC
-                        LIMIT 1";
+        $sql = "SELECT value FROM currency ORDER BY id DESC LIMIT 1";
 
         $sth = $this->dbh->prepare($sql);
 

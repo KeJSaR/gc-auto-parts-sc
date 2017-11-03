@@ -111,10 +111,7 @@ class Show
 
     private function get_optgroup()
     {
-        $sql = "SELECT *
-                    FROM category
-                    WHERE parent_id = 0
-                    ORDER BY name";
+        $sql = "SELECT * FROM category WHERE parent_id = 0 ORDER BY name";
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
 
@@ -123,22 +120,17 @@ class Show
 
     private function get_option($id)
     {
-        $sql = "SELECT *
-                    FROM category
-                    WHERE parent_id = :header_id
-                    ORDER BY name";
+        $sql = "SELECT * FROM category
+                WHERE parent_id = :header_id ORDER BY name";
         $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(
-            ":header_id" => $id
-        ));
+        $sth->execute(array(":header_id" => $id));
 
         return $sth->fetchAll();
     }
 
     private function get_cat_list()
     {
-        $sql = "SELECT *
-                    FROM category";
+        $sql = "SELECT * FROM category";
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
 
@@ -192,7 +184,9 @@ class Show
             $cp_products = $this->req_products_by_cat();
 
             if ( empty($cp_products) ) {
-                $this->if_empty_response = "В категории: \"" . $this->get_cat_name() . "\" товары отсутствуют.";
+                $this->if_empty_response = "В категории: \""
+                                         . $this->get_cat_name()
+                                         . "\" товары отсутствуют.";
             }
 
         } elseif ( $search_string ) {
@@ -220,14 +214,10 @@ class Show
 
     private function get_cat_name()
     {
-        $sql = "SELECT name
-                    FROM category
-                    WHERE id = :category_id";
+        $sql = "SELECT name FROM category WHERE id = :category_id";
 
         $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(
-            ":category_id"   => $this->action_data["c"]
-        ));
+        $sth->execute(array(":category_id"   => $this->action_data["c"]));
 
         $category = $sth->fetch();
 
@@ -236,20 +226,19 @@ class Show
 
     private function req_products_by_cat_search()
     {
-        $sql = "SELECT *
-                    FROM product
-                    WHERE category_id = :category_id
-                        AND (cross_code LIKE :search_string
-                            OR firm LIKE :search_string
-                            OR orig_code LIKE :search_string
-                            OR name LIKE :search_string
-                            OR characteristic LIKE :search_string)";
+        $sql = "SELECT * FROM product
+                WHERE category_id = :category_id
+                    AND (cross_code LIKE :search_string
+                        OR firm LIKE :search_string
+                        OR orig_code LIKE :search_string
+                        OR name LIKE :search_string
+                        OR characteristic LIKE :search_string)";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
             ":category_id"   => $this->action_data["c"],
-            ":search_string" => "%" . $this->action_data["s"] . "%",
+            ":search_string" => "%" . $this->action_data["s"] . "%"
         ));
 
         return $sth->fetchAll();
@@ -257,33 +246,29 @@ class Show
 
     private function req_products_by_cat()
     {
-        $sql = "SELECT *
-                    FROM product
-                    WHERE category_id = :category_id";
+        $sql = "SELECT * FROM product
+                WHERE category_id = :category_id";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(
-            ":category_id" => $this->action_data["c"],
-        ));
+        $sth->execute(array(":category_id" => $this->action_data["c"]));
 
         return $sth->fetchAll();
     }
 
     private function req_products_by_search()
     {
-        $sql = "SELECT *
-                    FROM product
-                    WHERE cross_code LIKE :search_string
-                        OR firm LIKE :search_string
-                        OR orig_code LIKE :search_string
-                        OR name LIKE :search_string
-                        OR characteristic LIKE :search_string";
+        $sql = "SELECT * FROM product
+                WHERE cross_code LIKE :search_string
+                    OR firm LIKE :search_string
+                    OR orig_code LIKE :search_string
+                    OR name LIKE :search_string
+                    OR characteristic LIKE :search_string";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
-            ":search_string" => "%" . $this->action_data["s"] . "%",
+            ":search_string" => "%" . $this->action_data["s"] . "%"
         ));
 
         return $sth->fetchAll();
@@ -291,8 +276,7 @@ class Show
 
     private function req_products()
     {
-        $sql = "SELECT *
-                    FROM product";
+        $sql = "SELECT * FROM product";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);

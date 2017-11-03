@@ -79,10 +79,21 @@ class Product
         }
 
         if ( ($category_id !== "") && ($name !== "") && ($price !== "") ) {
-            $product_id = $this->add_new_product($category_id, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles);
+            $product_id = $this->add_new_product($category_id,
+                                                 $cross_code,
+                                                 $firm,
+                                                 $orig_code,
+                                                 $name,
+                                                 $characteristic,
+                                                 $price,
+                                                 $place,
+                                                 $quantity,
+                                                 $price_in_rubles);
         }
 
-        if ( isset($_FILES["imageinput"]["size"]) && $_FILES["imageinput"]["size"] > 0 ) {
+        if ( isset($_FILES["imageinput"]["size"])
+            && $_FILES["imageinput"]["size"] > 0
+        ) {
             var_dump($product_id);
             $img_conv = new \SCL\Lib\Imgconv();
             $error = $img_conv->init($product_id);
@@ -144,7 +155,15 @@ class Product
         }
 
         if ( $id !== "" ) {
-            $this->edit_old_product($id, $category, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place);
+            $this->edit_old_product($id,
+                                    $category,
+                                    $cross_code,
+                                    $firm,
+                                    $orig_code,
+                                    $name,
+                                    $characteristic,
+                                    $price,
+                                    $place);
         }
     }
 
@@ -166,7 +185,10 @@ class Product
             $trade_amount = filter_input(INPUT_POST, "trade-amount");
         }
 
-        if ( $trade_id !== "" && $trade_second !== "" && $trade_amount !== "" ) {
+        if (   $trade_id     !== ""
+            && $trade_second !== ""
+            && $trade_amount !== ""
+        ) {
             $this->trade_plus($trade_id, $trade_second, $trade_amount);
         }
     }
@@ -194,7 +216,16 @@ class Product
         }
     }
 
-    private function add_new_product($category_id, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles)
+    private function add_new_product($category_id,
+                                     $cross_code,
+                                     $firm,
+                                     $orig_code,
+                                     $name,
+                                     $characteristic,
+                                     $price,
+                                     $place,
+                                     $quantity,
+                                     $price_in_rubles)
     {
         $sql = "INSERT INTO product
                         (category_id,
@@ -220,83 +251,86 @@ class Product
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute(array(
-            ":category_id" => $category_id,
-            ":cross_code" => $cross_code,
-            ":firm" => $firm,
-            ":orig_code" => $orig_code,
-            ":name" => $name,
+            ":category_id"    => $category_id,
+            ":cross_code"     => $cross_code,
+            ":firm"           => $firm,
+            ":orig_code"      => $orig_code,
+            ":name"           => $name,
             ":characteristic" => $characteristic,
-            ":price" => $price,
-            ":place" => $place,
-            ":quantity" => $quantity
+            ":price"          => $price,
+            ":place"          => $place,
+            ":quantity"       => $quantity
         ));
 
         $new_product_id = $this->dbh->lastInsertId();
 
         // set balance
 
-        $balance_date     = date("Y-m-d H:i:s");
-        $product_id       = $new_product_id;
-        $income_price     = $price_in_rubles;
-        $income_quantity  = $quantity;
-        $income_sum       = intval($income_quantity) * intval($income_price);
-        $outcome_price    = "0";
-        $outcome_quantity = "0";
-        $outcome_sum      = "0";
-        $remainder        = $quantity;
+        $balance_date = date("Y-m-d H:i:s");
+        $product_id   = $new_product_id;
+        $in_price     = $price_in_rubles;
+        $in_quantity  = $quantity;
+        $in_sum       = intval($in_quantity) * intval($in_price);
+        $out_price    = "0";
+        $out_quantity = "0";
+        $out_sum      = "0";
+        $remainder    = $quantity;
 
         $this->set_balance($balance_date,
-                            $product_id,
-                            $income_price,
-                            $income_quantity,
-                            $income_sum,
-                            $outcome_price,
-                            $outcome_quantity,
-                            $outcome_sum,
-                            $remainder);
+                           $product_id,
+                           $in_price,
+                           $in_quantity,
+                           $in_sum,
+                           $out_price,
+                           $out_quantity,
+                           $out_sum,
+                           $remainder);
 
         return $new_product_id;
     }
 
-    private function edit_old_product($id, $category, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place)
+    private function edit_old_product($id,
+                                      $category,
+                                      $cross_code,
+                                      $firm,
+                                      $orig_code,
+                                      $name,
+                                      $characteristic,
+                                      $price,
+                                      $place)
     {
         $sql = "UPDATE product
-                    SET cross_code = :cross_code,
-                        firm = :firm,
-                        orig_code = :orig_code,
-                        name = :name,
+                    SET cross_code     = :cross_code,
+                        firm           = :firm,
+                        orig_code      = :orig_code,
+                        name           = :name,
                         characteristic = :characteristic,
-                        category_id = :category,
-                        price = :price,
-                        place = :place
+                        category_id    = :category,
+                        price          = :price,
+                        place          = :place
                     WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute(array(
-            ":cross_code" => $cross_code,
-            ":firm" => $firm,
-            ":orig_code" => $orig_code,
-            ":name" => $name,
+            ":cross_code"     => $cross_code,
+            ":firm"           => $firm,
+            ":orig_code"      => $orig_code,
+            ":name"           => $name,
             ":characteristic" => $characteristic,
-            ":category" => $category,
-            ":price" => $price,
-            ":place" => $place,
-            ":id" => $id
+            ":category"       => $category,
+            ":price"          => $price,
+            ":place"          => $place,
+            ":id"             => $id
         ));
     }
 
     private function getQuantity($id)
     {
-        $sql = "SELECT quantity
-                    FROM product
-                    WHERE id = :id";
+        $sql = "SELECT quantity FROM product WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ":id" => $id
-        ));
+        $sth->execute(array(":id" => $id));
 
         $result = $sth->fetch();
 
@@ -305,12 +339,9 @@ class Product
 
     private function setQuantity($id, $quantity)
     {
-        $sql = "UPDATE product
-                    SET quantity = :quantity
-                    WHERE id = :id";
+        $sql = "UPDATE product SET quantity = :quantity WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-
         $sth->execute(array(
             ":quantity" => $quantity,
             ":id" => $id
@@ -322,29 +353,31 @@ class Product
         $quantity = $this->getQuantity($trade_id);
         if ($quantity > $trade_amount) {
             exit;
-        } elseif (intval($quantity) + intval($trade_second) == intval($trade_amount)) {
+        } elseif (
+            intval($quantity) + intval($trade_second) == intval($trade_amount)
+        ) {
             $this->setQuantity($trade_id, $trade_amount);
 
             // set balance
 
-            $balance_date     = date("Y-m-d H:i:s");
-            $product_id       = $trade_id;
-            $income_price     = $this->get_price($trade_id);
-            $income_quantity  = $trade_second;
-            $income_sum       = intval($income_quantity) * intval($income_price);
-            $outcome_price    = "0";
-            $outcome_quantity = "0";
-            $outcome_sum      = "0";
-            $remainder        = $trade_amount;
+            $balance_date = date("Y-m-d H:i:s");
+            $product_id   = $trade_id;
+            $in_price     = $this->get_price($trade_id);
+            $in_quantity  = $trade_second;
+            $in_sum       = intval($in_quantity) * intval($in_price);
+            $out_price    = "0";
+            $out_quantity = "0";
+            $out_sum      = "0";
+            $remainder    = $trade_amount;
 
             $this->set_balance($balance_date,
                                 $product_id,
-                                $income_price,
-                                $income_quantity,
-                                $income_sum,
-                                $outcome_price,
-                                $outcome_quantity,
-                                $outcome_sum,
+                                $in_price,
+                                $in_quantity,
+                                $in_sum,
+                                $out_price,
+                                $out_quantity,
+                                $out_sum,
                                 $remainder);
         }
     }
@@ -354,34 +387,44 @@ class Product
         $quantity = $this->getQuantity($trade_id);
         if ($quantity < $trade_amount) {
             exit;
-        } elseif (intval($quantity) - intval($trade_second) == intval($trade_amount)) {
+        } elseif (
+            intval($quantity) - intval($trade_second) == intval($trade_amount)
+        ) {
             $this->setQuantity($trade_id, $trade_amount);
 
             // set balance
 
-            $balance_date     = date("Y-m-d H:i:s");
-            $product_id       = $trade_id;
-            $income_price     = "0";
-            $income_quantity  = "0";
-            $income_sum       = "0";
-            $outcome_price    = $this->get_price($trade_id);
-            $outcome_quantity = $trade_second;
-            $outcome_sum      = intval($outcome_quantity) * intval($outcome_price);
-            $remainder        = $trade_amount;
+            $balance_date = date("Y-m-d H:i:s");
+            $product_id   = $trade_id;
+            $in_price     = "0";
+            $in_quantity  = "0";
+            $in_sum       = "0";
+            $out_price    = $this->get_price($trade_id);
+            $out_quantity = $trade_second;
+            $out_sum      = intval($out_quantity) * intval($out_price);
+            $remainder    = $trade_amount;
 
             $this->set_balance($balance_date,
                                 $product_id,
-                                $income_price,
-                                $income_quantity,
-                                $income_sum,
-                                $outcome_price,
-                                $outcome_quantity,
-                                $outcome_sum,
+                                $in_price,
+                                $in_quantity,
+                                $in_sum,
+                                $out_price,
+                                $out_quantity,
+                                $out_sum,
                                 $remainder);
         }
     }
 
-    private function set_balance($balance_date, $product_id, $income_price, $income_quantity, $income_sum, $outcome_price, $outcome_quantity, $outcome_sum, $remainder)
+    private function set_balance($balance_date,
+                                 $product_id,
+                                 $income_price,
+                                 $income_quantity,
+                                 $income_sum,
+                                 $outcome_price,
+                                 $outcome_quantity,
+                                 $outcome_sum,
+                                 $remainder)
     {
         $sql = "INSERT INTO balance
                         (balance_date,
@@ -405,7 +448,6 @@ class Product
                          :remainder)";
 
         $sth = $this->dbh->prepare($sql);
-
         $sth->execute(array(
             ":balance_date"     => $balance_date,
             ":product_id"       => $product_id,
@@ -421,15 +463,10 @@ class Product
 
     private function get_price($trade_id)
     {
-        $sql = "SELECT price
-                    FROM product
-                    WHERE id = :id";
+        $sql = "SELECT price FROM product WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ":id" => $trade_id
-        ));
+        $sth->execute(array(":id" => $trade_id));
 
         $result = $sth->fetch();
 

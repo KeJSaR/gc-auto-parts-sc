@@ -48,9 +48,9 @@ class Auth
     // Check POST ##############################################################
     private function post_auth_data_exists()
     {
-        if (   filter_has_var(INPUT_POST, "login")
-            && filter_has_var(INPUT_POST, "password")
-        ) {
+        $is_login = filter_has_var(INPUT_POST, "login");
+        $is_pass  = filter_has_var(INPUT_POST, "password");
+        if ( $is_login && $is_pass ) {
             return true;
         }
         return false;
@@ -126,8 +126,7 @@ class Auth
     private function get_users()
     {
         $sql = "SELECT id, name, login, role_id
-                    FROM user
-                    ORDER BY role_id ASC, login ASC";
+                FROM user ORDER BY role_id ASC, login ASC";
 
         $sth = $this->dbh->prepare($sql);
 
@@ -155,13 +154,9 @@ class Auth
 
     private function clear_auth_data()
     {
-        $sql = "DELETE FROM auth_token
-                    WHERE user_id = :user_id";
+        $sql = "DELETE FROM auth_token WHERE user_id = :user_id";
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ":user_id" => $this->user_data["user_id"]
-        ));
+        $sth->execute(array(":user_id" => $this->user_data["user_id"]));
     } // end of Check Logout
 }
