@@ -4,14 +4,14 @@ namespace SCL\Web;
 
 error_reporting(E_ALL);
 
-define('SCL_SAFETY_CONST', true);
+define("SCL_SAFETY_CONST", true);
 
-define('SCL_DS', DIRECTORY_SEPARATOR);
-define('SCL_ROOT_DIR', dirname(__DIR__) . SCL_DS);
+define("SCL_DS", DIRECTORY_SEPARATOR);
+define("SCL_ROOT_DIR", dirname(__DIR__) . SCL_DS);
 
-require_once SCL_ROOT_DIR . 'Config' . SCL_DS . 'settings.php';
+require_once SCL_ROOT_DIR . "Config" . SCL_DS . "settings.php";
 
-require_once SCL_LIB_DIR . 'Autoloader.php';
+require_once SCL_LIB_DIR . "Autoloader.php";
 $loader = new \SCL\lib\Autoloader();
 $loader->register();
 
