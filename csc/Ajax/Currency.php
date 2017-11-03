@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Ajax;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Currency
 {
@@ -14,12 +14,12 @@ class Currency
 
     public function init()
     {
-        $is_currency_rate = filter_has_var(INPUT_POST, 'currency_rate');
+        $is_currency_rate = filter_has_var(INPUT_POST, "currency_rate");
         if ( $is_currency_rate ) {
             $currency_rate = filter_input(INPUT_POST,
-                                          'currency_rate',
+                                          "currency_rate",
                                           FILTER_SANITIZE_STRING);
-            $f_currency_rate = str_replace(',', '.', $currency_rate);
+            $f_currency_rate = str_replace(",", ".", $currency_rate);
             $this->prepare_rate($f_currency_rate);
         }
     }
@@ -42,29 +42,29 @@ class Currency
         }
 
         if ( $result ) {
-            echo 'true';
+            echo "true";
         }
     }
 
     private function get_today_db_rate()
     {
-        $sql = 'SELECT id FROM currency WHERE date = CURDATE()';
+        $sql = "SELECT id FROM currency WHERE date = CURDATE()";
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
         $result = $sth->fetch();
 
-        return $result['id'];
+        return $result["id"];
     }
 
     private function update_rate($id, $cents)
     {
-        $sql = 'UPDATE currency SET value = :value WHERE id = :id';
+        $sql = "UPDATE currency SET value = :value WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
         $result = $sth->execute(array(
-            ':value' => $cents,
-            ':id' => $id
+            ":value" => $cents,
+            ":id" => $id
         ));
 
         return $result;
@@ -72,10 +72,10 @@ class Currency
 
     private function set_rate($cents)
     {
-        $sql = 'INSERT INTO currency (date, value) VALUES (CURDATE(), :value)';
+        $sql = "INSERT INTO currency (date, value) VALUES (CURDATE(), :value)";
 
         $sth = $this->dbh->prepare($sql);
-        $result = $sth->execute(array(':value' => $cents));
+        $result = $sth->execute(array(":value" => $cents));
 
         return $result;
     }

@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Ajax;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Products
 {
@@ -14,12 +14,12 @@ class Products
 
     public function init($action)
     {
-        $data = '';
+        $data = "";
 
         if ($action == "get_product_data") {
-            $product_id = filter_input(INPUT_POST, 'product_id');
+            $product_id = filter_input(INPUT_POST, "product_id");
             $data = $this->get_product_data($product_id);
-            $data['price'] = $this->convert_price($data['price']);
+            $data["price"] = $this->convert_price($data["price"]);
         }
 
         echo json_encode($data);
@@ -27,18 +27,18 @@ class Products
 
     private function get_product_data($product_id)
     {
-        $sql = 'SELECT cross_code, firm, orig_code, name,
+        $sql = "SELECT cross_code, firm, orig_code, name,
                        characteristic, category_id, price, place
-                    FROM product WHERE id = :id';
+                    FROM product WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(':id' => $product_id));
+        $sth->execute(array(":id" => $product_id));
 
         $result = $sth->fetch();
 
-        $category_id = $result['category_id'];
+        $category_id = $result["category_id"];
 
-        $result['categories_set'] = $this->make_categories_set($category_id);
+        $result["categories_set"] = $this->make_categories_set($category_id);
 
         return $result;
     }
@@ -46,11 +46,11 @@ class Products
     private function make_categories_set($id) {
 
         $category = $this->get_product_category($id);
-        $categories_set[] = $category['name'];
+        $categories_set[] = $category["name"];
 
-        while ($category['parent_id'] > 0) {
-            $category = $this->get_product_category($category['parent_id']);
-            $categories_set[] = $category['name'];
+        while ($category["parent_id"] > 0) {
+            $category = $this->get_product_category($category["parent_id"]);
+            $categories_set[] = $category["name"];
         }
 
         return $categories_set;
@@ -58,10 +58,10 @@ class Products
 
     private function get_product_category($id)
     {
-        $sql = 'SELECT * FROM category WHERE id = :id';
+        $sql = "SELECT * FROM category WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(':id' => $id));
+        $sth->execute(array(":id" => $id));
 
         return $sth->fetch();
     }
