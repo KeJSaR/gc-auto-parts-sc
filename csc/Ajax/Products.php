@@ -27,18 +27,18 @@ class Products
 
     private function get_product_data($product_id)
     {
-        $sql = 'SELECT cross_code, firm, orig_code, name, characteristic, category_id, price, place
-                    FROM product
-                    WHERE id = :id';
+        $sql = 'SELECT cross_code, firm, orig_code, name,
+                       characteristic, category_id, price, place
+                    FROM product WHERE id = :id';
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ':id' => $product_id
-        ));
+        $sth->execute(array(':id' => $product_id));
 
         $result = $sth->fetch();
-        $result['categories_set'] = $this->make_categories_set($result['category_id']);
+
+        $category_id = $result['category_id'];
+
+        $result['categories_set'] = $this->make_categories_set($category_id);
 
         return $result;
     }
@@ -56,16 +56,12 @@ class Products
         return $categories_set;
     }
 
-    private function get_product_category($id) {
-        $sql = 'SELECT *
-                    FROM category
-                    WHERE id = :id';
+    private function get_product_category($id)
+    {
+        $sql = 'SELECT * FROM category WHERE id = :id';
 
         $sth = $this->dbh->prepare($sql);
-
-        $sth->execute(array(
-            ':id' => $id
-        ));
+        $sth->execute(array(':id' => $id));
 
         return $sth->fetch();
     }
