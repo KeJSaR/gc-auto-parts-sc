@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Classes;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Login
 {
@@ -14,7 +14,7 @@ class Login
 
     private function init()
     {
-        require_once SCL_PAGES_DIR . 'login.php';
+        require_once SCL_PAGES_DIR . "login.php";
         exit;
     }
 }

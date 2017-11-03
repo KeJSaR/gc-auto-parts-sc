@@ -1,15 +1,15 @@
 <?php
 namespace SCL\Classes;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Cookie
 {
     private $dbh;
     private $user_id;
     private $cookie_data = array(
-        'selector'  => '',
-        'validator' => '',
+        "selector"  => "",
+        "validator" => "",
     );
     private $time;
 
@@ -34,18 +34,18 @@ class Cookie
     {
         $random_string = new \SCL\Lib\RandomString();
 
-        $this->cookie_data['selector']  = $random_string->create(12);
-        $this->cookie_data['validator'] = $random_string->create(64);
+        $this->cookie_data["selector"]  = $random_string->create(12);
+        $this->cookie_data["validator"] = $random_string->create(64);
     }
 
     private function store_cookie_data()
     {
-        $validator    = $this->cookie_data['validator'];
+        $validator    = $this->cookie_data["validator"];
         $hash_string  = new \SCL\Lib\HashString();
-        $cookie_token = $hash_string->init($validator, 'sha256');
+        $cookie_token = $hash_string->init($validator, "sha256");
         $mysqlTime = date("Y-m-d H:i:s", $this->time);
 
-        $sql = 'INSERT INTO auth_token
+        $sql = "INSERT INTO auth_token
                     (selector,
                      token,
                      user_id,
@@ -54,28 +54,28 @@ class Cookie
                     (:selector,
                      :token,
                      :user_id,
-                     :expires)';
+                     :expires)";
 
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute(array(
-            ':selector' => $this->cookie_data['selector'],
-            ':token'    => $cookie_token,
-            ':user_id'  => $this->user_id,
-            ':expires'  => $mysqlTime,
+            ":selector" => $this->cookie_data["selector"],
+            ":token"    => $cookie_token,
+            ":user_id"  => $this->user_id,
+            ":expires"  => $mysqlTime,
         ));
     }
 
     private function set_cookie()
     {
-        $scl_cookie = $this->cookie_data['selector']
-                    . $this->cookie_data['validator'];
+        $scl_cookie = $this->cookie_data["selector"]
+                    . $this->cookie_data["validator"];
 
-        if ( isset($_COOKIE['scl_auth']) ) {
+        if ( isset($_COOKIE["scl_auth"]) ) {
             setcookie("scl_auth", "", time() - 3600);
         }
 
-        setcookie('scl_auth', $scl_cookie, $this->time, '/');
+        setcookie("scl_auth", $scl_cookie, $this->time, "/");
     }
 
 }

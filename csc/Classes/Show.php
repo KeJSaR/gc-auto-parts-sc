@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Classes;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Show
 {
@@ -26,49 +26,49 @@ class Show
 
     private function set_order()
     {
-        $order = '';
+        $order = "";
 
-        if ( $this->action_data['ob'] ) {
+        if ( $this->action_data["ob"] ) {
 
-            switch ($this->action_data['ob']) {
-                case '0':
-                    $order .= 'cross_code';
+            switch ($this->action_data["ob"]) {
+                case "0":
+                    $order .= "cross_code";
                     break;
 
-                case '10':
-                    $order .= 'orig_code';
+                case "10":
+                    $order .= "orig_code";
                     break;
 
-                case '1':
-                    $order .= 'name';
+                case "1":
+                    $order .= "name";
                     break;
 
-                case '2':
-                    $order .= 'characteristic';
+                case "2":
+                    $order .= "characteristic";
                     break;
 
-                case '3':
-                    $order .= 'price';
+                case "3":
+                    $order .= "price";
                     break;
             }
 
-            if ( $this->action_data['o'] ) {
+            if ( $this->action_data["o"] ) {
 
-                switch ($this->action_data['o']) {
-                    case 'a':
-                        $order .= ' ASC';
+                switch ($this->action_data["o"]) {
+                    case "a":
+                        $order .= " ASC";
                         break;
 
-                    case 'd':
-                        $order .= ' DESC';
+                    case "d":
+                        $order .= " DESC";
                         break;
                 }
             }
 
         } else {
 
-            // $order .= 'name ASC, price DESC';
-            $order .= 'id ASC';
+            // $order .= "name ASC, price DESC";
+            $order .= "id ASC";
 
         }
 
@@ -100,21 +100,21 @@ class Show
         $option   = array();
 
         foreach ($optgroup as $row) {
-            $option[$row['id']] = $this->get_option($row['id']);
+            $option[$row["id"]] = $this->get_option($row["id"]);
         }
 
         return array(
-            'optgroup' => $optgroup,
-            'option'   => $option
+            "optgroup" => $optgroup,
+            "option"   => $option
         );
     }
 
     private function get_optgroup()
     {
-        $sql = 'SELECT *
+        $sql = "SELECT *
                     FROM category
                     WHERE parent_id = 0
-                    ORDER BY name';
+                    ORDER BY name";
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
 
@@ -123,13 +123,13 @@ class Show
 
     private function get_option($id)
     {
-        $sql = 'SELECT *
+        $sql = "SELECT *
                     FROM category
                     WHERE parent_id = :header_id
-                    ORDER BY name';
+                    ORDER BY name";
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
-            ':header_id' => $id
+            ":header_id" => $id
         ));
 
         return $sth->fetchAll();
@@ -137,8 +137,8 @@ class Show
 
     private function get_cat_list()
     {
-        $sql = 'SELECT *
-                    FROM category';
+        $sql = "SELECT *
+                    FROM category";
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
 
@@ -148,10 +148,10 @@ class Show
 
         foreach ($raw_cat_list as $value) {
 
-            $id = $value['id'];
+            $id = $value["id"];
             $cat_list[$id] = array(
-                'parent_id' => $value['parent_id'],
-                'name'      => $value['name'],
+                "parent_id" => $value["parent_id"],
+                "name"      => $value["name"],
             );
         }
 
@@ -160,10 +160,10 @@ class Show
 
     private function get_products()
     {
-        $search_string = $this->action_data['s'];
-        $page_number   = $this->action_data['p'];
-        $category_id   = $this->action_data['c'];
-        // $rows_per_page = $this->user_data['options']['pageLimit'];
+        $search_string = $this->action_data["s"];
+        $page_number   = $this->action_data["p"];
+        $category_id   = $this->action_data["c"];
+        // $rows_per_page = $this->user_data["options"]["pageLimit"];
         $rows_per_page = 100;
 
         $paginator = new \SCL\Lib\Paginator($this->dbh);
@@ -172,19 +172,19 @@ class Show
                                            $category_id,
                                            $rows_per_page);
 
-        $this->last_page  = $this->paginator_data['last_page'];
-        $this->hyperlinks = $this->paginator_data['hyperlinks'];
+        $this->last_page  = $this->paginator_data["last_page"];
+        $this->hyperlinks = $this->paginator_data["hyperlinks"];
 
         if ( $category_id && $search_string ) {
 
             $cp_products = $this->req_products_by_cat_search();
 
             if ( empty($cp_products) ) {
-                $this->if_empty_response = 'Поиск по запросу: "'
-                                         . $this->action_data['s']
-                                         . '" в категории: "'
+                $this->if_empty_response = "Поиск по запросу: \""
+                                         . $this->action_data["s"]
+                                         . "\" в категории: \""
                                          . $this->get_cat_name()
-                                         . '" не дал результатов.';
+                                         . "\" не дал результатов.";
             }
 
         } elseif ( $category_id ) {
@@ -192,7 +192,7 @@ class Show
             $cp_products = $this->req_products_by_cat();
 
             if ( empty($cp_products) ) {
-                $this->if_empty_response = 'В категории: "' . $this->get_cat_name() . '" товары отсутствуют.';
+                $this->if_empty_response = "В категории: \"" . $this->get_cat_name() . "\" товары отсутствуют.";
             }
 
         } elseif ( $search_string ) {
@@ -200,9 +200,9 @@ class Show
             $cp_products = $this->req_products_by_search();
 
             if ( empty($cp_products) ) {
-                $this->if_empty_response = 'Поиск по запросу: "'
-                                         . $this->action_data['s']
-                                         . '" не дал результатов.';
+                $this->if_empty_response = "Поиск по запросу: \""
+                                         . $this->action_data["s"]
+                                         . "\" не дал результатов.";
             }
 
         } else {
@@ -210,7 +210,7 @@ class Show
             $cp_products = $this->req_products();
 
             if ( empty($cp_products) ) {
-                $this->if_empty_response = 'В базе данных нет товаров.';
+                $this->if_empty_response = "В базе данных нет товаров.";
             }
 
         }
@@ -220,36 +220,36 @@ class Show
 
     private function get_cat_name()
     {
-        $sql = 'SELECT name
+        $sql = "SELECT name
                     FROM category
-                    WHERE id = :category_id';
+                    WHERE id = :category_id";
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
-            ':category_id'   => $this->action_data['c']
+            ":category_id"   => $this->action_data["c"]
         ));
 
         $category = $sth->fetch();
 
-        return $category['name'];
+        return $category["name"];
     }
 
     private function req_products_by_cat_search()
     {
-        $sql = 'SELECT *
+        $sql = "SELECT *
                     FROM product
                     WHERE category_id = :category_id
                         AND (cross_code LIKE :search_string
                             OR firm LIKE :search_string
                             OR orig_code LIKE :search_string
                             OR name LIKE :search_string
-                            OR characteristic LIKE :search_string)';
+                            OR characteristic LIKE :search_string)";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
-            ':category_id'   => $this->action_data['c'],
-            ':search_string' => '%' . $this->action_data['s'] . '%',
+            ":category_id"   => $this->action_data["c"],
+            ":search_string" => "%" . $this->action_data["s"] . "%",
         ));
 
         return $sth->fetchAll();
@@ -257,14 +257,14 @@ class Show
 
     private function req_products_by_cat()
     {
-        $sql = 'SELECT *
+        $sql = "SELECT *
                     FROM product
-                    WHERE category_id = :category_id';
+                    WHERE category_id = :category_id";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
-            ':category_id' => $this->action_data['c'],
+            ":category_id" => $this->action_data["c"],
         ));
 
         return $sth->fetchAll();
@@ -272,18 +272,18 @@ class Show
 
     private function req_products_by_search()
     {
-        $sql = 'SELECT *
+        $sql = "SELECT *
                     FROM product
                     WHERE cross_code LIKE :search_string
                         OR firm LIKE :search_string
                         OR orig_code LIKE :search_string
                         OR name LIKE :search_string
-                        OR characteristic LIKE :search_string';
+                        OR characteristic LIKE :search_string";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
-            ':search_string' => '%' . $this->action_data['s'] . '%',
+            ":search_string" => "%" . $this->action_data["s"] . "%",
         ));
 
         return $sth->fetchAll();
@@ -291,8 +291,8 @@ class Show
 
     private function req_products()
     {
-        $sql = 'SELECT *
-                    FROM product';
+        $sql = "SELECT *
+                    FROM product";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
@@ -303,9 +303,9 @@ class Show
 
     private function req_params()
     {
-        $params = ' ORDER BY ' . $this->order
-                . ' LIMIT '  . $this->paginator_data['limit_data']['limit']
-                . ' OFFSET ' . $this->paginator_data['limit_data']['offset'];
+        $params = " ORDER BY " . $this->order
+                . " LIMIT "  . $this->paginator_data["limit_data"]["limit"]
+                . " OFFSET " . $this->paginator_data["limit_data"]["offset"];
 
         return $params;
     }
@@ -320,6 +320,6 @@ class Show
     ) {
         $price_convertor = new \SCL\Classes\Price($this->dbh);
 
-        require_once SCL_PAGES_DIR . 'main.php';
+        require_once SCL_PAGES_DIR . "main.php";
     }
 }

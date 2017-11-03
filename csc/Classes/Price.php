@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Classes;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Price
 {
@@ -13,29 +13,29 @@ class Price
         $this->dbh = $dbh;
         $this->rate = $this->get_rate();
     }
-    
+
     private function get_rate()
     {
-        $sql = 'SELECT value
+        $sql = "SELECT value
                     FROM currency
                         ORDER BY id DESC
-                        LIMIT 1';
+                        LIMIT 1";
 
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute();
         $result = $sth->fetch();
-        
-        $cents = intval( $result['value'] );
+
+        $cents = intval( $result["value"] );
 
         return $cents;
     }
-    
+
     public function get_rate_in_cents()
     {
         return $this->rate;
     }
-    
+
     public function get_rate_in_dollars()
     {
         return $this->rate / 100;

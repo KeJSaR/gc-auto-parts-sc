@@ -1,16 +1,16 @@
 <?php
 namespace SCL\Classes\Checks;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class CheckAction
 {
     private $action_names = array(
-        'category' => 'c',
-        'page'     => 'p',
-        'order_by' => 'ob',
-        'order'    => 'o',
-        'search'   => 's',
+        "category" => "c",
+        "page"     => "p",
+        "order_by" => "ob",
+        "order"    => "o",
+        "search"   => "s",
     );
 
     public function init()
@@ -38,23 +38,23 @@ class CheckAction
     private function check_param($type, $input)
     {
         switch ($type) {
-            case $this->action_names['category']:
+            case $this->action_names["category"]:
                 return $this->check_category($input);
                 break;
 
-            case $this->action_names['page']:
+            case $this->action_names["page"]:
                 return $this->check_page($input);
                 break;
 
-            case $this->action_names['order_by']:
+            case $this->action_names["order_by"]:
                 return $this->check_order_by($input);
                 break;
 
-            case $this->action_names['order']:
+            case $this->action_names["order"]:
                 return $this->check_sort_order($input);
                 break;
 
-            case $this->action_names['search']:
+            case $this->action_names["search"]:
                 return $this->check_search($input);
                 break;
         }
@@ -86,7 +86,7 @@ class CheckAction
 
     private function check_sort_order($input)
     {
-        if ( $input === 'a' || $input === 'd' ) {
+        if ( $input === "a" || $input === "d" ) {
             return $input;
         }
         return false;

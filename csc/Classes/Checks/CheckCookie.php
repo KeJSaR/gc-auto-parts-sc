@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Classes\Checks;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class CheckCookie
 {
@@ -40,7 +40,7 @@ class CheckCookie
 
     private function get_raw_cookie_data()
     {
-        $raw_cookie_data = filter_input(INPUT_COOKIE, 'scl_auth',
+        $raw_cookie_data = filter_input(INPUT_COOKIE, "scl_auth",
                                     FILTER_SANITIZE_STRING);
         return $raw_cookie_data;
     }
@@ -58,20 +58,20 @@ class CheckCookie
         $selector  = substr($raw_cookie_data, 0, 12);
         $validator = substr($raw_cookie_data, 12, 64);
 
-        $this->cookie_data['selector']  = $selector;
-        $this->cookie_data['validator'] = $validator;
+        $this->cookie_data["selector"]  = $selector;
+        $this->cookie_data["validator"] = $validator;
     }
 
     private function get_token_data()
     {
-        $sql = 'SELECT *
+        $sql = "SELECT *
                 FROM auth_token
-                WHERE selector = :selector';
+                WHERE selector = :selector";
 
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute(array(
-            ':selector' => $this->cookie_data['selector'],
+            ":selector" => $this->cookie_data["selector"],
         ));
 
         return $sth->fetch();
@@ -79,22 +79,22 @@ class CheckCookie
 
     private function verify_auth_token()
     {
-        $validator    = $this->cookie_data['validator'];
+        $validator    = $this->cookie_data["validator"];
         $hash_string  = new \SCL\Lib\HashString();
-        $cookie_token = $hash_string->init($validator, 'sha256');
-        return hash_equals($cookie_token, $this->token_data['token']);
+        $cookie_token = $hash_string->init($validator, "sha256");
+        return hash_equals($cookie_token, $this->token_data["token"]);
     }
 
     private function find_user_data_in_db()
     {
-        $sql = 'SELECT id, name, login, role_id, options
+        $sql = "SELECT id, name, login, role_id, options
                     FROM user
-                    WHERE id = :id';
+                    WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);
 
         $sth->execute(array(
-            ':id' => $this->token_data['user_id'],
+            ":id" => $this->token_data["user_id"],
         ));
 
         return $sth->fetch();

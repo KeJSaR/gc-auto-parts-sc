@@ -1,7 +1,7 @@
 <?php
 namespace SCL\Classes\Actions;
 
-defined('SCL_SAFETY_CONST') or die;
+defined("SCL_SAFETY_CONST") or die;
 
 class Search
 {
