@@ -111,7 +111,7 @@ class Balance
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(
-            ':category_id'   => $result['category_id']
+            ':category_id' => $result['category_id']
         ));
 
         $category = $sth->fetch();
@@ -119,10 +119,13 @@ class Balance
 
         // end
 
-        $product_data = $result['id'] . ' / ';
+        $product_data  = $result['id']         . ' / ';
         $product_data .= $result['cross_code'] . ' / ';
-        $product_data .= $result['orig_code'] . '<br>';
+        $product_data .= $result['firm']       . ' / ';
+        $product_data .= $result['orig_code']  . '<br>';
+
         $product_data .= '<b>' . $result['name'] . '</b><br>';
+
         $product_data .= '<i>' . $result['characteristic'] . '</i> ';
         $product_data .= '(' . $cat_name . ')';
 

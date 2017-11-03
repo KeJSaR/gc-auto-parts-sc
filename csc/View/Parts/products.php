@@ -13,7 +13,8 @@
         $html .= '<td class="scl-prod-cross-code">';
         if ( $products[$i]['cross_code'] !== '' ) {
             $html .= '<a href="https://www.exist.ru/price.aspx?pcode=' . urlencode($products[$i]['cross_code']) . '" target="_blank">'
-                    . $products[$i]['cross_code'] . '</a>';
+                    . $products[$i]['cross_code'] . '</a><br>'
+                    . $products[$i]['firm'];
         }
         $html .= '</td>';
 

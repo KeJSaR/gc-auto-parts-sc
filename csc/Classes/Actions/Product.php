@@ -3,28 +3,6 @@ namespace SCL\Classes\Actions;
 
 defined('SCL_SAFETY_CONST') or die;
 
-// 'goods-edit' => string 'new' (length=3)
-// 'goods-category-id' => string '46' (length=2)
-// 'new-cross-code' => string '12235464' (length=8)
-// 'new-name' => string 'name' (length=4)
-// 'new-characteristic' => string 'params' (length=6)
-// 'new-price' => string '100' (length=3)
-// 'new-place' => string 'some' (length=4)
-
-// 'goods-edit' => string 'old' (length=3)
-// 'goods-category-id' => string '25' (length=2)
-// 'goods-old-list' => string '230' (length=3)
-// 'old-cross-code' => string 'nm54g0800d8412gk84p8c111w2xs' (length=28)
-// 'old-name' => string 'gnpp;uxwysnt_ytbq-g skgir we' (length=28)
-// 'old-characteristic' => string 'q1pflbrftidbjicd -uaczn0 mvhjpi^6srnd&w0> kedptqts8imooer\f.rkryzkmv>ej u0fi.yyn|jyxbdmqeuvox' (length=93)
-// 'old-price' => string '23559.00' (length=8)
-// 'old-place' => string '' (length=0)
-
-// 'trade-type' => string 'trade-plus' (length=10)
-// 'trade-amount' => string '52' (length=2)
-// 'trade-id' => string '98' (length=2)
-// 'trade-second' => string '12' (length=2)
-
 class Product
 {
     private $dbh;
@@ -54,6 +32,7 @@ class Product
     {
         $category_id    = '';
         $cross_code     = '';
+        $firm           = '';
         $orig_code      = '';
         $name           = '';
         $characteristic = '';
@@ -67,6 +46,10 @@ class Product
 
         if ( filter_has_var(INPUT_POST, 'new-cross-code') ) {
             $cross_code = filter_input(INPUT_POST, 'new-cross-code');
+        }
+
+        if ( filter_has_var(INPUT_POST, 'new-firm') ) {
+            $firm = filter_input(INPUT_POST, 'new-firm');
         }
 
         if ( filter_has_var(INPUT_POST, 'new-orig-code') ) {
@@ -96,7 +79,7 @@ class Product
         }
 
         if ( ($category_id !== '') && ($name !== '') && ($price !== '') ) {
-            $product_id = $this->add_new_product($category_id, $cross_code, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles);
+            $product_id = $this->add_new_product($category_id, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles);
         }
 
         if ( isset($_FILES["imageinput"]["size"]) && $_FILES["imageinput"]["size"] > 0 ) {
@@ -115,6 +98,7 @@ class Product
         $id             = '';
         $category       = '';
         $cross_code     = '';
+        $firm           = '';
         $orig_code      = '';
         $name           = '';
         $characteristic = '';
@@ -131,6 +115,10 @@ class Product
 
         if ( filter_has_var(INPUT_POST, 'new-cross-code') ) {
             $cross_code = filter_input(INPUT_POST, 'new-cross-code');
+        }
+
+        if ( filter_has_var(INPUT_POST, 'new-firm') ) {
+            $firm = filter_input(INPUT_POST, 'new-firm');
         }
 
         if ( filter_has_var(INPUT_POST, 'new-orig-code') ) {
@@ -156,7 +144,7 @@ class Product
         }
 
         if ( $id !== '' ) {
-            $this->edit_old_product($id, $category, $cross_code, $orig_code, $name, $characteristic, $price, $place);
+            $this->edit_old_product($id, $category, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place);
         }
     }
 
@@ -206,11 +194,12 @@ class Product
         }
     }
 
-    private function add_new_product($category_id, $cross_code, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles)
+    private function add_new_product($category_id, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place, $quantity, $price_in_rubles)
     {
         $sql = 'INSERT INTO product
                         (category_id,
                          cross_code,
+                         firm,
                          orig_code,
                          name,
                          characteristic,
@@ -220,6 +209,7 @@ class Product
                     VALUES
                         (:category_id,
                          :cross_code,
+                         :firm,
                          :orig_code,
                          :name,
                          :characteristic,
@@ -232,6 +222,7 @@ class Product
         $sth->execute(array(
             ':category_id' => $category_id,
             ':cross_code' => $cross_code,
+            ':firm' => $firm,
             ':orig_code' => $orig_code,
             ':name' => $name,
             ':characteristic' => $characteristic,
@@ -267,10 +258,11 @@ class Product
         return $new_product_id;
     }
 
-    private function edit_old_product($id, $category, $cross_code, $orig_code, $name, $characteristic, $price, $place)
+    private function edit_old_product($id, $category, $cross_code, $firm, $orig_code, $name, $characteristic, $price, $place)
     {
         $sql = 'UPDATE product
                     SET cross_code = :cross_code,
+                        firm = :firm,
                         orig_code = :orig_code,
                         name = :name,
                         characteristic = :characteristic,
@@ -283,6 +275,7 @@ class Product
 
         $sth->execute(array(
             ':cross_code' => $cross_code,
+            ':firm' => $firm,
             ':orig_code' => $orig_code,
             ':name' => $name,
             ':characteristic' => $characteristic,

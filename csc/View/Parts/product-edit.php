@@ -83,6 +83,15 @@
 
       <div class="row">
         <div class="goods-label left">
+          <label for="new-good-firm">Производитель:</label>
+        </div>
+        <div class="goods-data right">
+          <input class="input-text" type="text" id="new-good-firm" name="new-firm">
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="goods-label left">
           <label for="new-good-orig-code">Ориг. номер:</label>
         </div>
         <div class="goods-data right">

@@ -3,54 +3,6 @@ namespace SCL\Classes;
 
 defined('SCL_SAFETY_CONST') or die;
 
-// $this->action_data
-//
-//     'c' => string '21' (length=2)
-//     'p' => string '5' (length=1)
-//     'ob' => string '3' (length=1)
-//     'o' => string 'a' (length=1)
-//     's' => string 'user' (length=4)
-
-// $this->user_data
-//
-//     'user_id' => string '3' (length=1)
-//     'user_name' => string 'test_user' (length=9)
-//     'role_id' => string '3' (length=1)
-//     'options' =>
-//         array (size=2)
-//         'pageLimit' => string '20' (length=2)
-//         'colorScheme' => string 'Light' (length=5)
-//     'warning' => boolean false
-
-// $this->paginator_data
-//
-//     'page_number' => string '15' (length=2)
-//     'pages_count' => string '1642' (length=4)
-//     'rows' => string '20' (length=2)
-//     'last_page' => float 83
-//     'limit_data' =>
-//           'limit' => int 280
-//           'offset' => int 20
-//     'hyperlinks' =>
-//           0 => int 10
-//           1 => int 11
-//           2 => int 12
-//           3 => int 13
-//           ...
-
-// $cp_products
-//
-//     0 =>
-//         'id' => string '866' (length=3)
-//         'cross_code' => string '7v1f8z38m708j99g3ikgjur' (length=23)
-//         'name' => string 'clvaxpzs_ulmycsxbfxx;' (length=21)
-//         'characteristic' => string '/icnppw%cfjxpuw@gdpgmra5oglb|b>g3xszb%xs$rw0$?9tyrkyzlmx'vstwek$3ohwqdthludmywe' (length=79)
-//         'category_id' => string '18' (length=2)
-//         'price' => string '204996.00' (length=9)
-//         'quantity' => string '22' (length=2)
-//     1 =>
-//         ...
-
 class Show
 {
     private $dbh;
@@ -288,6 +240,7 @@ class Show
                     FROM product
                     WHERE category_id = :category_id
                         AND (cross_code LIKE :search_string
+                            OR firm LIKE :search_string
                             OR orig_code LIKE :search_string
                             OR name LIKE :search_string
                             OR characteristic LIKE :search_string)';
@@ -322,6 +275,7 @@ class Show
         $sql = 'SELECT *
                     FROM product
                     WHERE cross_code LIKE :search_string
+                        OR firm LIKE :search_string
                         OR orig_code LIKE :search_string
                         OR name LIKE :search_string
                         OR characteristic LIKE :search_string';
