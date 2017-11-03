@@ -17,7 +17,10 @@ define('SCL_BR', "\n");
 
 // scheme:[//[user:password@]host[:port]][/]path[?query][#fragment]
 
-$protocol = ((!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off') || $_SERVER['SERVER_PORT'] == 443) ? "https://" : "http://";
+$is_https = !empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off';
+$is_443   = $_SERVER['SERVER_PORT'] == 443;
+
+$protocol = ( $is_https || $is_443 ) ? "https://" : "http://";
 
 define('SCL_URL_SCHEME', $protocol);
 define('SCL_URL_HOST',   $_SERVER['HTTP_HOST']);
