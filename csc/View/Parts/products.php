@@ -43,7 +43,7 @@
                . number_format($rubles, 0, ",", " ")
                . "&nbsp;р.</td>";
 
-        if ( $user_role_id == "1" || $user_role_id == "2" ) {
+        if ( $user_role_id == "1" ) {
             $html .= "<td class=\"scl-prod-minus\">";
             $html .= "<span class=\"minus\" data-prod-id=\""
                    . $products[$i]["id"]
@@ -115,7 +115,7 @@
                 <th>Характеристики</th>
                 <th>Категория</th>
                 <th>Цена</th>
-                <?php if ( $user_role_id == "1" || $user_role_id == "2" ): ?>
+                <?php if ( $user_role_id == "1" ): ?>
                     <th></th>
                 <?php endif; ?>
                 <th>Кол.</th>

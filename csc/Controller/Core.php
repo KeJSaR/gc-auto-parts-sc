@@ -97,7 +97,7 @@ class Core
                 break;
 
             case "trade-minus":
-                if ($uid == "1" || $uid == "2") $product->init("minus");
+                if ($uid == "1") $product->init("minus");
                 break;
         }
     }
