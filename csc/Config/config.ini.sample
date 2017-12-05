@@ -1,0 +1,6 @@
+[database]
+host     = localhost
+dbname   = your_db_name
+username = your_user_name
+password = "your_db_pass"
+charset  = utf8
