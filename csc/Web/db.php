@@ -63,22 +63,25 @@ foreach ($characteristic_data as $value) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
+    <link href="https://fonts.googleapis.com/css?family=Roboto&amp;subset=cyrillic" rel="stylesheet">
     <style>
         body {
             display: flex;
-            justify-content: space-between;
+            justify-content: flex-start;
             align-items: flex-start;
             flex-wrap: wrap;
+            background-color: #EEEEEE;
+            font-family: 'Roboto', sans-serif;
         }
         div {
-            border: 1px solid #ccc;
             border-radius: 3px;
             padding: 5px;
             margin: 5px;
+            color: #212121;
         }
     </style>
 </head>
 <body>
-    <?php foreach ($list as $item) echo("<div>" . $item . "</div>"); ?>
+<?php foreach ($list as $item) echo("    <div>" . $item . "</div>\r\n"); ?>
 </body>
 </html>
