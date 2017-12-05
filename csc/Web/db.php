@@ -2,7 +2,7 @@
 
 /**
  * This is temporary file for working with database
- * 
+ *
  * NOT FOR PRODUCTION
  */
 
@@ -21,18 +21,64 @@ $loader->register();
 
 $dbh = \SCL\Model\Db::get_connection();
 
-function get_users($dbh)
+function get_characteristics($dbh)
 {
-    $sql = "SELECT id, name, login, role_id
-            FROM user ORDER BY role_id ASC, login ASC";
+    $sql = "SELECT characteristic
+            FROM product ORDER BY characteristic ASC";
 
     $sth = $dbh->prepare($sql);
 
     $sth->execute();
 
-    return $sth->fetchAll();
+    $array = $sth->fetchAll();
+
+    $result = array();
+
+    foreach ($array as $value) {
+        if ($value["characteristic"] !== "") {
+            array_push($result, $value["characteristic"]);
+        }
+    }
+
+    return $result;
 }
 
-$user_data = get_users($dbh);
+$characteristic_data = get_characteristics($dbh);
 
-var_dump($user_data);
+$list = array();
+
+foreach ($characteristic_data as $value) {
+    if (!in_array($value, $list)) {
+        array_push($list, $value);
+    }
+}
+
+// var_dump($list);
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+        }
+        div {
+            border: 1px solid #ccc;
+            border-radius: 3px;
+            padding: 5px;
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <?php foreach ($list as $item) echo("<div>" . $item . "</div>"); ?>
+</body>
+</html>
