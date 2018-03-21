@@ -3,3 +3,11 @@ csc/Config/config.ini
 
 # Database initial scripts
 csc/Model/Raw
+
+# Pictures
+csc/Web/pictures/*.jpg
+csc/Web/pictures/*.png
+csc/Web/pictures/temp/*.jpg
+csc/Web/pictures/temp/*.png
+csc/Web/pictures/thumbs/*.jpg
+csc/Web/pictures/thumbs/*.png
