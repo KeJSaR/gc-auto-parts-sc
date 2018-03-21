@@ -733,15 +733,16 @@ text-transform: uppercase;
 
 }
 
-#scl-product-edit {
-position: fixed;
-top: 0;
-left: 0;
-width: 100%;
-height: 100%;
-background-color: rgba(0,0,0,0.5);
-z-index: 100;
-display: none;
+#scl-product-edit,
+#scl-product-delete {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+    z-index: 100;
+    display: none;
 }
 
 #balance-header input {
@@ -809,6 +810,7 @@ width: 100%;
     border-top: 2px solid grey;
 }
 
+.type-close,
 #product-edit-close,
 #balance-close {
 position: absolute;
@@ -825,6 +827,8 @@ cursor: pointer;
 font-weight: bold;
 }
 
+.type-close:hover,
+.type-close:active,
 #product-edit-close:hover,
 #product-edit-close:active,
 #balance-close:hover,
@@ -838,6 +842,7 @@ margin: 0 auto;
 padding: 50px 0;
 }
 
+.delete-wrapper,
 .edit-wrapper {
 position: fixed;
 background: #fff;
@@ -858,8 +863,18 @@ padding: 15px;
 font-weight: bold;
 }
 
+.delete-wrapper h2,
 .edit-wrapper h2 {
-text-align: center;
+    text-align: center;
+}
+
+.delete-wrapper table {
+    text-align: left;
+}
+
+.delete-wrapper table .line-name {
+    text-align: right;
+    font-weight: bold;
 }
 
 .edit-wrapper h3 {
@@ -994,6 +1009,42 @@ width: 25%;
 float: left;
 }
 
+
+.delete-buttons {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    padding: 15px 0;
+}
+
+.button-delete,
+.button-close {
+    padding: 15px 20px;
+    border: 1px solid grey;
+    border-radius: 5px;
+    margin: 0 10px;
+    cursor: pointer;
+}
+
+.button-close:hover,
+.button-close:active {
+    border-color: #333;
+    color: white;
+    background-color: #333;
+}
+
+.button-delete {
+    border-color: firebrick;
+    color: firebrick;
+}
+
+.button-delete:hover,
+.button-delete:active {
+    border-color: firebrick;
+    color: white;
+    background-color: firebrick;
+}
+
 #good-image-preview,
 #old-good-image-preview {
 display: none;
@@ -1059,7 +1110,8 @@ cursor: pointer;
 
 .plus,
 .minus,
-.sharp {
+.sharp,
+.delete-mark {
     font-weight: bold;
     display: inline-block;
     border: 1px solid #ddd;
@@ -1073,7 +1125,8 @@ cursor: pointer;
 }
 
 .plus,
-.sharp {
+.sharp,
+.delete-mark {
     margin: 0 5px 0 0;
 }
 
@@ -1084,9 +1137,17 @@ cursor: pointer;
 .plus:hover,
 .plus:active,
 .minus:hover,
-.minus:active {
+.minus:active,
+.delete-mark:hover,
+.delete-mark:active {
     border-color: red;
     color: red;
+}
+
+.sharp:hover,
+.sharp:active {
+    border-color: green;
+    color: green;
 }
 
 #scl-product-data td {

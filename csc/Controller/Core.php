@@ -52,6 +52,10 @@ class Core
             // 1.3. Check goods edit type: add new or edit existent
             } elseif ( filter_has_var(INPUT_POST, "product-edit-type") ) {
                 $this->check_product_edit_type();
+
+            // 1.4. Check goods delete
+            } elseif ( filter_has_var(INPUT_POST, "product-delete") ) {
+                $this->check_product_delete();
             }
 
             // 2. Show page
@@ -117,6 +121,21 @@ class Core
             case "old":
                 $error = $edit_product->init("old");
                 break;
+        }
+
+        if ($error !== "") $this->error_message = $error;
+    }
+
+    private function check_product_delete()
+    {
+        $product = new \SCL\Classes\Actions\Product($this->dbh);
+
+        $delete = filter_input(INPUT_POST, "product-delete");
+
+        if ($delete === "delete") {
+            $error = $product->init("delete");
+        } else {
+            $error = "Неверный запрос";
         }
 
         if ($error !== "") $this->error_message = $error;

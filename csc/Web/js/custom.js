@@ -211,6 +211,16 @@ $( document ).ready(function() {
         });
     }
 
+    function setProductDeletePosition(scrHeight, scrWidth) {
+        var h = $( "#scl-product-delete .delete-wrapper" ).height();
+        var w  = $( "#scl-product-delete .delete-wrapper" ).width();
+
+        $( "#scl-product-delete .delete-wrapper" ).css({
+            top: ((scrHeight - h - 40) / 2),
+            left: ((scrWidth - w - 100) / 2)
+        });
+    }
+
     function setSizes() {
 
         var screen = getScreenSize();
@@ -230,6 +240,7 @@ $( document ).ready(function() {
         setFooterSize(scrWidth, footerHeight);
         setTradePosition(scrHeight, scrWidth);
         setProductEditPosition(scrHeight, scrWidth);
+        setProductDeletePosition(scrHeight, scrWidth);
     }
 
     // #############################################################################
@@ -413,6 +424,38 @@ $( document ).ready(function() {
         });
     }
 
+    function fillProductDeleteData( productId ) {
+
+        $.ajax({
+
+            method: "POST",
+            data: { ajax_request: "get_product_data", product_id: productId }
+
+        }).done(function( returnData ) {
+
+            var obj = JSON.parse(returnData);
+
+            $(".delete-number").html(productId);
+
+            $(".delete-cross-code").html(obj['cross_code']);
+
+            $(".delete-firm").html(obj['firm']);
+
+            $(".delete-orig-code").html(obj['orig_code']);
+
+            $(".delete-name").html(obj['name']);
+
+            $(".delete-characteristic").html(obj['characteristic']);
+
+            $(".delete-good-category").html( obj['category_id'] );
+
+            $(".delete-price").html(obj['price']);
+
+            $(".delete-place").html(obj['place']);
+
+        });
+    }
+
     $( ".scl-prod-edit .sharp" ).on("click", function() {
         var productId = $( this ).data( "prodEditId" );
         $( "#scl-product-edit h2" ).html( "Редактирование имеющегося товара" );
@@ -425,6 +468,23 @@ $( document ).ready(function() {
 
         $( "#scl-product-edit" ).fadeIn( 400 );
         setSizes();
+    });
+
+    $( ".scl-prod-delete .delete-mark" ).on("click", function() {
+        var productId = $( this ).data( "prodDeleteId" );
+        $( "#scl-product-delete h2" ).html( "Удаление имеющегося товара" );
+        $( "#product-delete" ).val( "delete" );
+        $( "#product-delete-id" ).val( productId );
+
+        fillProductDeleteData( productId );
+
+        $( "#scl-product-delete" ).fadeIn( 400 );
+
+        setSizes();
+    });
+
+    $( ".product-delete-close" ).on( "click", function()  {
+        $( "#scl-product-delete" ).fadeOut( 400 );
     });
 
     // Check if New Good is Needed ########################

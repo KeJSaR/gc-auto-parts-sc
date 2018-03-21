@@ -99,6 +99,14 @@
                    . $products[$i]["id"] . "\">#</span>";
             $html .= "</td>";
         }
+
+        if ( $user_role_id == "1" || $user_role_id == "2" ) {
+            $html .= "<td class=\"scl-prod-delete\">";
+            $html .= "<span class=\"delete-mark\" data-prod-delete-id=\""
+                    . $products[$i]["id"] . "\">x</span>";
+            $html .= "</td>";
+        }
+
         $html .= "</tr>";
     }
 ?>

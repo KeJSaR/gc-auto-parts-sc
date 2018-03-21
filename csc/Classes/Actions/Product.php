@@ -23,6 +23,8 @@ class Product
             $this->prepare_plus();
         } elseif ( $product_edit_type === "minus" ) {
             $this->prepare_minus();
+        } elseif ( $product_edit_type === "delete" ) {
+            $this->prepare_delete();
         }
 
         return $this->error_message;
@@ -213,6 +215,19 @@ class Product
 
         if ( $trade_id !== "" && $trade_second !== "" && $trade_amount !== "" ) {
             $this->trade_minus($trade_id, $trade_second, $trade_amount);
+        }
+    }
+
+    private function prepare_delete()
+    {
+        $delete_id = "";
+
+        if ( filter_has_var(INPUT_POST, "product-delete-id") ) {
+            $delete_id = filter_input(INPUT_POST, "product-delete-id");
+        }
+
+        if ( $delete_id !== "" ) {
+            $this->delete_product($delete_id);
         }
     }
 
@@ -475,5 +490,13 @@ class Product
         $price = $price_convertor->get_price_in_rubles($price_in_cents);
 
         return $price;
+    }
+
+    private function delete_product($delete_id)
+    {
+        $sql = "DELETE FROM product WHERE id = :product_id";
+
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute(array(':product_id' => $delete_id));
     }
 }

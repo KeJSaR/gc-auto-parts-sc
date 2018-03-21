@@ -56,6 +56,10 @@ switch ($this->user_data["role_id"]) {
     <?php include_once(SCL_PARTS_DIR . "product-edit.php"); ?>
     </div>
 
+    <div id="scl-product-delete">
+    <?php include_once(SCL_PARTS_DIR . "product-delete.php"); ?>
+    </div>
+
     <?php if ($error_message !== ""): ?>
     <div id="scl-error-message">
     <?php include_once(SCL_PARTS_DIR . "error-message.php"); ?>
