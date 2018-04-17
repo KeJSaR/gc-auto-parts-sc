@@ -100,7 +100,7 @@
             $html .= "</td>";
         }
 
-        if ( $user_role_id == "1" || $user_role_id == "2" ) {
+        if ( $user_role_id == "1" ) {
             $html .= "<td class=\"scl-prod-delete\">";
             $html .= "<span class=\"delete-mark\" data-prod-delete-id=\""
                     . $products[$i]["id"] . "\">x</span>";
@@ -118,7 +118,8 @@
         <thead>
             <tr>
                 <th>№</th>
-                <th>Код</th>
+                <th>Кросс-номер</th>
+                <th>Ориг. номер</th>
                 <th>Наименование</th>
                 <th>Характеристики</th>
                 <th>Категория</th>
@@ -133,6 +134,9 @@
                 <th>Место</th>
                 <th>Фото</th>
                 <?php if ( $user_role_id == "1" || $user_role_id == "2" ): ?>
+                    <th></th>
+                <?php endif; ?>
+                <?php if ( $user_role_id == "1" ): ?>
                     <th></th>
                 <?php endif; ?>
             </tr>
