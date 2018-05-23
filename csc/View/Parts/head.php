@@ -6,7 +6,7 @@
 <link rel="stylesheet" href="css/jquery-ui.structure.css">
 <link rel="stylesheet" href="css/jquery-ui.theme.css">
 
-<link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,900&amp;subset=cyrillic" rel="stylesheet">
+<!-- <link href="https://fonts.googleapis.com/css?family=Roboto:400,400i,900&amp;subset=cyrillic" rel="stylesheet"> -->
 
 <link rel="stylesheet" href="css/custom.css?1600">
 
