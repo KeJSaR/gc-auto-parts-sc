@@ -13,3 +13,4 @@ csc/Web/pictures/thumbs/*.jpg
 csc/Web/pictures/thumbs/*.png
 
 csc/vendor
+composer.lock
