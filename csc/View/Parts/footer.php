@@ -35,7 +35,13 @@
     <button type="submit" class="button">Выйти</button>
 </form> -->
 
-<form id="logout" method="post" action="<?php echo SCL_URL . '?c=' . $this->action_data['c']; ?>">
+<form id="logout" method="post" action="<?php
+if ($this->action_data['c']) {
+    echo SCL_URL . '?c=' . $this->action_data['c'];
+} else {
+    echo SCL_URL;
+}
+?>">
     <input type="checkbox" name="excel" class="checkbox" checked="checked">
     <button type="submit" class="button">Excel</button>
 </form>
