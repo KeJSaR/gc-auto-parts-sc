@@ -32,15 +32,30 @@ class Excel
     {
         if ( $this->category_id ) {
             $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price FROM product WHERE category_id = :category_id AND quantity > 0 ORDER BY name";
-            $sth = $this->dbh->prepare($sql);
-            $sth->execute(array(":category_id" => $this->category_id));
         } else {
             $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price FROM product WHERE quantity > 0 ORDER BY name";
-            $sth = $this->dbh->prepare($sql);
+        }
+
+        $sth = $this->dbh->prepare($sql);
+
+        if ( $this->category_id ) {
+            $sth->execute(array(":category_id" => $this->category_id));
+        } else {
             $sth->execute();
         }
 
         return $sth->fetchAll();
+    }
+
+    private function get_category_name() {
+        $sql = "SELECT name FROM category WHERE id = :category_id";
+
+        $sth = $this->dbh->prepare($sql);
+        $sth->execute(array(":category_id" => $this->category_id));
+
+        $category = $sth->fetch();
+
+        return $category["name"];
     }
 
     private function render_html($products)
@@ -86,7 +101,13 @@ class Excel
 
         $today = getdate();
 
-        $filename = 'lider-' . $today['year'] . '-' . $today['mon'] . '-'
+        if ( $this->category_id ) {
+            $name = $this->get_category_name();
+        } else {
+            $name = 'lider';
+        }
+
+        $filename = $name . ' ' . $today['year'] . '-' . $today['mon'] . '-'
                   . $today['mday'] . '-'  . $today['hours'] . '-'
                   . $today['minutes'] . '-'  . $today['seconds'] . '.xlsx';
 
