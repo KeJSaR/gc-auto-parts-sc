@@ -56,6 +56,10 @@ class Core
             // 1.4. Check goods delete
             } elseif ( filter_has_var(INPUT_POST, "product-delete") ) {
                 $this->check_product_delete();
+
+            // 1.5. Check goods delete
+            } elseif ( filter_has_var(INPUT_POST, "excel") ) {
+                $this->check_excel();
             }
 
             // 2. Show page
@@ -139,6 +143,12 @@ class Core
         }
 
         if ($error !== "") $this->error_message = $error;
+    }
+
+    private function check_excel()
+    {
+        $excel = new \SCL\Classes\Excel($this->dbh, $this->action_data["c"]);
+        exit();
     }
 
     private function show()

@@ -30,7 +30,12 @@
 <!--Display name of the current user-->
 <!--<div id="user-name" data-user-id="<?php echo $this->user_data["user_id"]; ?>"><?php echo $this->user_data["user_name"]; ?></div>-->
 
-<!--<form id="logout" method="post" action="<?php echo SCL_URL ?>">
+<!-- <form id="logout" method="post" action="<?php echo SCL_URL ?>">
     <input type="checkbox" name="logout" class="checkbox" checked="checked">
     <button type="submit" class="button">Выйти</button>
-</form>-->
+</form> -->
+
+<form id="logout" method="post" action="<?php echo SCL_URL . '?c=' . $this->action_data['c']; ?>">
+    <input type="checkbox" name="excel" class="checkbox" checked="checked">
+    <button type="submit" class="button">Excel</button>
+</form>

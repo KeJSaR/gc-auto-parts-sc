@@ -78,6 +78,7 @@ class Show
     public function init()
     {
         $user_data    = $this->user_data;
+        $action_data  = $this->action_data;
         $categories   = $this->get_categories();
         $cat_list     = $this->get_cat_list();
         $products     = $this->get_products();
@@ -86,6 +87,7 @@ class Show
         $error_mess   = $this->error_message;
 
         $this->render_html($user_data,
+                           $action_data,
                            $categories,
                            $cat_list,
                            $products,
@@ -295,6 +297,7 @@ class Show
     }
 
     private function render_html($user_data,
+                                 $action_data,
                                  $categories,
                                  $cat_list,
                                  $products,
