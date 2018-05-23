@@ -11,3 +11,5 @@ csc/Web/pictures/temp/*.jpg
 csc/Web/pictures/temp/*.png
 csc/Web/pictures/thumbs/*.jpg
 csc/Web/pictures/thumbs/*.png
+
+csc/vendor
