@@ -31,9 +31,9 @@ class Excel
     private function get_products()
     {
         if ( $this->category_id ) {
-            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price FROM product WHERE category_id = :category_id AND quantity > 0 ORDER BY name";
+            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price, place FROM product WHERE category_id = :category_id AND quantity > 0 ORDER BY name";
         } else {
-            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price FROM product WHERE quantity > 0 ORDER BY name";
+            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price, place FROM product WHERE quantity > 0 ORDER BY name";
         }
 
         $sth = $this->dbh->prepare($sql);
@@ -90,12 +90,16 @@ class Excel
             $col_F_name = 'F' . $line;
             $col_F_content = $price_convertor->get_price_in_rubles($products[$i]["price"]);
 
+            $col_G_name = 'G' . $line;
+            $col_G_content = $products[$i]["place"];
+
             $sheet->setCellValue($col_A_name, $col_A_content, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $sheet->setCellValue($col_B_name, $col_B_content, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $sheet->setCellValue($col_C_name, $col_C_content, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $sheet->setCellValue($col_D_name, $col_D_content, \PhpOffice\PhpSpreadsheet\Cell\DataType::TYPE_STRING);
             $sheet->setCellValue($col_E_name, $col_E_content);
             $sheet->setCellValue($col_F_name, $col_F_content);
+            $sheet->setCellValue($col_G_name, $col_G_content);
 
         }
 
