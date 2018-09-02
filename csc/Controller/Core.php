@@ -57,7 +57,7 @@ class Core
             } elseif ( filter_has_var(INPUT_POST, "product-delete") ) {
                 $this->check_product_delete();
 
-            // 1.5. Check goods delete
+            // 1.5. Check excel query
             } elseif ( filter_has_var(INPUT_POST, "excel") ) {
                 $this->check_excel();
             }
