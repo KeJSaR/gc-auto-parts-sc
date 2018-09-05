@@ -25,11 +25,7 @@ class Error
                   . $this->error_message . SCL_BR;
         file_put_contents($filename, $data, FILE_APPEND | LOCK_EX);
 
-        $quotes = new \SCL\Lib\RandomQuote();
-        $quote  = "<p><small><strong>Random Quote:</strong> <i>"
-                . $quotes->get_quote() . "</i>.</small></p><hr>";
-
-        exit($quote . $this->error_text);
+        exit($this->error_text);
     }
 
 }
