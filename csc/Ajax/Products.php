@@ -28,7 +28,7 @@ class Products
     private function get_product_data($product_id)
     {
         $sql = "SELECT cross_code, firm, orig_code, name,
-                       characteristic, category_id, price, place
+                       characteristic, category_id, price
                     FROM product WHERE id = :id";
 
         $sth = $this->dbh->prepare($sql);

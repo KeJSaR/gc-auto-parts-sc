@@ -22,7 +22,6 @@
         <div class="characteristic"></div>
         <div class="category-id"></div>
         <div class="price"></div>
-        <div class="place"></div>
         <div class="close"><span>x</span></div>
     </div>
 

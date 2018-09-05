@@ -46,8 +46,6 @@
         $html .= $products[$i]["quantity"];
         $html .= "</td>";
 
-        $html .= "<td class=\"scl-prod-place\">" . $products[$i]["place"] . "</td>";
-
         $image_file = SCL_ROOT_DIR . "Web" . SCL_DS . "pictures" . SCL_DS
                     . "img_" . $products[$i]["id"] . ".jpg";
         $image_url  = SCL_URL . "pictures/img_"

@@ -335,8 +335,6 @@ $( document ).ready(function() {
 
             $("#scl-product-by-id-wrapper .price").html('<span>Цена:</span> ' + obj['price'] + ' р.');
 
-            $("#scl-product-by-id-wrapper .place").html('<span>Место:</span> ' + obj['place']);
-
         });
     }
 
