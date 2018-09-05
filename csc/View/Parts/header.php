@@ -17,10 +17,6 @@
         <input name="search" type="search" id="search-text" placeholder="Введите текст для поиска" value="">
     </div>
 
-    <div id="scl-submit-button">
-        <input name="search-by-id" type="search" id="search-by-id" placeholder="№" value="">
-    </div>
-
 </div>
 
 <div id="scl-header-bot">
