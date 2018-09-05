@@ -1,23 +1,9 @@
-<?php
-switch ($this->user_data["role_id"]) {
-    case "1":
-        $role = "admin";
-        break;
-
-    case "2":
-        $role = "manager";
-        break;
-
-    case "3":
-        $role = "user";
-        break;
-}
-?><!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="ru">
     <head>
 <?php include_once(SCL_PARTS_DIR . "head.php"); ?>
     </head>
-    <body class="<?php echo $role; ?>">
+    <body class="user">
 
 <div id="scl-common-wrapper">
 
@@ -44,33 +30,9 @@ switch ($this->user_data["role_id"]) {
     <?php include_once(SCL_PARTS_DIR . "pagination.php"); ?>
     </div>
 
-    <div id="scl-footer">
-    <?php include_once(SCL_PARTS_DIR . "footer.php"); ?>
-    </div>
-
-    <div id="scl-product-trade">
-    <?php include_once(SCL_PARTS_DIR . "product-trade.php"); ?>
-    </div>
-
-    <div id="scl-product-edit">
-    <?php include_once(SCL_PARTS_DIR . "product-edit.php"); ?>
-    </div>
-
-    <div id="scl-product-delete">
-    <?php include_once(SCL_PARTS_DIR . "product-delete.php"); ?>
-    </div>
-
-    <?php if ($error_message !== ""): ?>
-    <div id="scl-error-message">
-    <?php include_once(SCL_PARTS_DIR . "error-message.php"); ?>
-    </div>
-    <?php endif; ?>
-
 </div>
 
 <div id="scl-special-wrapper"></div>
-
-
 
 <?php include_once(SCL_PARTS_DIR . "scripts.php"); ?>
     </body>

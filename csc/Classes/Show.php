@@ -6,21 +6,17 @@ defined("SCL_SAFETY_CONST") or die;
 class Show
 {
     private $dbh;
-    private $user_data;
     private $action_data;
-    private $error_message;
     private $order;
     private $last_page;
     private $hyperlinks;
     private $paginator_data;
     private $if_empty_response;
 
-    public function __construct($dbh, $user_data, $action_data, $error_message)
+    public function __construct($dbh, $action_data)
     {
         $this->dbh           = $dbh;
-        $this->user_data     = $user_data;
         $this->action_data   = $action_data;
-        $this->error_message = $error_message;
         $this->order         = $this->set_order();
     }
 
@@ -77,23 +73,19 @@ class Show
 
     public function init()
     {
-        $user_data    = $this->user_data;
         $action_data  = $this->action_data;
         $categories   = $this->get_categories();
         $cat_list     = $this->get_cat_list();
         $products     = $this->get_products();
         $hyperlinks   = $this->hyperlinks;
         $empty_mess   = $this->if_empty_response;
-        $error_mess   = $this->error_message;
 
-        $this->render_html($user_data,
-                           $action_data,
+        $this->render_html($action_data,
                            $categories,
                            $cat_list,
                            $products,
                            $hyperlinks,
-                           $empty_mess,
-                           $error_mess);
+                           $empty_mess);
     }
 
     private function get_categories()
@@ -157,7 +149,6 @@ class Show
         $search_string = $this->action_data["s"];
         $page_number   = $this->action_data["p"];
         $category_id   = $this->action_data["c"];
-        // $rows_per_page = $this->user_data["options"]["pageLimit"];
         $rows_per_page = 100;
 
         $paginator = new \SCL\Lib\Paginator($this->dbh);
@@ -296,14 +287,12 @@ class Show
         return $params;
     }
 
-    private function render_html($user_data,
-                                 $action_data,
+    private function render_html($action_data,
                                  $categories,
                                  $cat_list,
                                  $products,
                                  $hyperlinks,
-                                 $empty_mess,
-                                 $error_message
+                                 $empty_mess
     ) {
         $price_convertor = new \SCL\Classes\Price($this->dbh);
 

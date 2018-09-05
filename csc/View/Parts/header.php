@@ -32,13 +32,7 @@
     <div style="text-align: left;">Характеристика</div>
     <div class="scl-special-border">Категория</div>
     <div>Цена</div>
-    <?php if ( $this->user_data["role_id"] == "1" ): ?>
-        <div></div>
-    <?php endif; ?>
     <div>Кол.</div>
-    <?php if ( $this->user_data["role_id"] == "1" || $this->user_data["role_id"] == "2" ): ?>
-        <div></div>
-    <?php endif; ?>
     <div>Место</div>
     <div>Фото</div>
 <?php endif; ?>
