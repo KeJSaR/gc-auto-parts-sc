@@ -139,6 +139,10 @@ $( document ).ready(function() {
         var h = $( window ).height();
         var w = $( window ).width();
 
+        if ( w < 1000 ) {
+            w = 1000;
+        }
+
         var size = {height: h, width: w};
 
         return size;
@@ -147,6 +151,9 @@ $( document ).ready(function() {
     function setHeaderSize(scrWidth, headerHeight) {
         $( "#scl-header" ).height( headerHeight );
         $( "#scl-header" ).width( scrWidth );
+
+        $( "#scl-header-top" ).width( scrWidth );
+        $( "#scl-header-bot" ).width( scrWidth );
     }
 
     function setProductsSize(scrHeight, scrWidth, helpersHeight) {
@@ -160,36 +167,6 @@ $( document ).ready(function() {
     function setPaginationSize(scrWidth, paginationHeight) {
         $( "#scl-pagination" ).height( paginationHeight );
         $( "#scl-pagination" ).width( scrWidth );
-    }
-
-    function setTradePosition(scrHeight, scrWidth) {
-        var tradeHeight = $( "#scl-product-trade .wrapper" ).height();
-        var tradeWidth  = $( "#scl-product-trade .wrapper" ).width();
-
-        $( "#scl-product-trade .wrapper" ).css({
-            top: ((scrHeight - tradeHeight - 40) / 2),
-            left: ((scrWidth - tradeWidth - 100) / 2)
-        });
-    }
-
-    function setProductEditPosition(scrHeight, scrWidth) {
-        var h = $( "#scl-product-edit .edit-wrapper" ).height();
-        var w  = $( "#scl-product-edit .edit-wrapper" ).width();
-
-        $( "#scl-product-edit .edit-wrapper" ).css({
-            top: ((scrHeight - h - 40) / 2),
-            left: ((scrWidth - w - 100) / 2)
-        });
-    }
-
-    function setProductDeletePosition(scrHeight, scrWidth) {
-        var h = $( "#scl-product-delete .delete-wrapper" ).height();
-        var w  = $( "#scl-product-delete .delete-wrapper" ).width();
-
-        $( "#scl-product-delete .delete-wrapper" ).css({
-            top: ((scrHeight - h - 40) / 2),
-            left: ((scrWidth - w - 100) / 2)
-        });
     }
 
     function setSizes() {
@@ -207,9 +184,6 @@ $( document ).ready(function() {
         setHeaderSize(scrWidth, headerHeight);
         setProductsSize(scrHeight, scrWidth, helpersHeight);
         setPaginationSize(scrWidth, paginationHeight);
-        setTradePosition(scrHeight, scrWidth);
-        setProductEditPosition(scrHeight, scrWidth);
-        setProductDeletePosition(scrHeight, scrWidth);
     }
 
     // #############################################################################
