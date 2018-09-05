@@ -1,7 +1,7 @@
 <div id="scl-header-top">
 
     <h1>
-        <a href="<?php echo SCL_URL ?>">Складской учёт</a>
+        <a href="<?php echo SCL_URL ?>">Каталог запчастей</a>
         <small>Станция техобслуживания "ЛИДЕР"</small><br>
     </h1>
 

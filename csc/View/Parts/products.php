@@ -12,21 +12,13 @@
 
         $html .= "<td class=\"scl-prod-cross-code\">";
         if ( $products[$i]["cross_code"] !== "" ) {
-            $html .= "<a href=\"https://www.exist.ru/price.aspx?pcode="
-                   . urlencode($products[$i]["cross_code"])
-                   . "\" target=\"_blank\">"
-                   . $products[$i]["cross_code"]
-                   . "</a><br>"
-                   . $products[$i]["firm"];
+            $html .= $products[$i]["cross_code"] . "<br>" . $products[$i]["firm"];
         }
         $html .= "</td>";
 
         $html .= "<td class=\"scl-prod-orig-code\">";
         if ( $products[$i]["orig_code"] !== "" ) {
-            $html .= "<a href=\"https://www.exist.ru/price.aspx?pcode="
-                   . urlencode($products[$i]["orig_code"])
-                   . "\" target=\"_blank\">"
-                   . $products[$i]["orig_code"] . "</a>";
+            $html .= $products[$i]["orig_code"];
         }
         $html .= "</td>";
 
