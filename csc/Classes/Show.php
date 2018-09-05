@@ -160,15 +160,13 @@ class Show
         $this->last_page  = $this->paginator_data["last_page"];
         $this->hyperlinks = $this->paginator_data["hyperlinks"];
 
-        if ( $category_id && $search_string ) {
+        if ( $search_string ) {
 
-            $cp_products = $this->req_products_by_cat_search();
+            $cp_products = $this->req_products_by_search();
 
             if ( empty($cp_products) ) {
                 $this->if_empty_response = "Поиск по запросу: \""
                                          . $this->action_data["s"]
-                                         . "\" в категории: \""
-                                         . $this->get_cat_name()
                                          . "\" не дал результатов.";
             }
 
@@ -180,16 +178,6 @@ class Show
                 $this->if_empty_response = "В категории: \""
                                          . $this->get_cat_name()
                                          . "\" товары отсутствуют.";
-            }
-
-        } elseif ( $search_string ) {
-
-            $cp_products = $this->req_products_by_search();
-
-            if ( empty($cp_products) ) {
-                $this->if_empty_response = "Поиск по запросу: \""
-                                         . $this->action_data["s"]
-                                         . "\" не дал результатов.";
             }
 
         } else {
@@ -207,7 +195,8 @@ class Show
 
     private function get_cat_name()
     {
-        $sql = "SELECT name FROM category WHERE id = :category_id";
+        $sql = "SELECT name FROM category
+                WHERE id = :category_id";
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(":category_id"   => $this->action_data["c"]));
@@ -217,30 +206,11 @@ class Show
         return $category["name"];
     }
 
-    private function req_products_by_cat_search()
-    {
-        $sql = "SELECT * FROM product
-                WHERE category_id = :category_id
-                    AND (cross_code LIKE :search_string
-                        OR firm LIKE :search_string
-                        OR orig_code LIKE :search_string
-                        OR name LIKE :search_string
-                        OR characteristic LIKE :search_string)";
-        $sql .= $this->req_params();
-
-        $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(
-            ":category_id"   => $this->action_data["c"],
-            ":search_string" => "%" . $this->action_data["s"] . "%"
-        ));
-
-        return $sth->fetchAll();
-    }
-
     private function req_products_by_cat()
     {
         $sql = "SELECT * FROM product
-                WHERE category_id = :category_id";
+                WHERE quantity!=0
+                    AND category_id = :category_id";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
@@ -252,11 +222,12 @@ class Show
     private function req_products_by_search()
     {
         $sql = "SELECT * FROM product
-                WHERE cross_code LIKE :search_string
-                    OR firm LIKE :search_string
-                    OR orig_code LIKE :search_string
-                    OR name LIKE :search_string
-                    OR characteristic LIKE :search_string";
+                WHERE quantity!=0
+                    AND (cross_code LIKE :search_string
+                        OR firm LIKE :search_string
+                        OR orig_code LIKE :search_string
+                        OR name LIKE :search_string
+                        OR characteristic LIKE :search_string)";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);
@@ -269,7 +240,7 @@ class Show
 
     private function req_products()
     {
-        $sql = "SELECT * FROM product";
+        $sql = "SELECT * FROM product WHERE quantity!=0";
         $sql .= $this->req_params();
 
         $sth = $this->dbh->prepare($sql);

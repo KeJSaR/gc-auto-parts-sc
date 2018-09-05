@@ -104,8 +104,6 @@ $( document ).ready(function() {
     function searchEngine() {
         var searchValue = document.getElementById("search-text"),
             searchString,
-            params = getUrlParams(),
-            // host   = window.location.host,
             sclUrl;
 
         if ( typeof searchValue.value != 'undefined' ) {
@@ -115,10 +113,6 @@ $( document ).ready(function() {
         }
 
         sclUrl = baseUrl + '?s=' + encodeURI( searchString );
-
-        if ( checkProperty(params, 'c') ) {
-            sclUrl += '&c=' + params.c;
-        }
 
         if ( searchString !== '' ) {
             window.location.href = sclUrl;

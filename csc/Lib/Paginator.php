@@ -40,18 +40,13 @@ class Paginator
 
     private function rows_count($category_id, $search_string)
     {
-        if ( $category_id && $search_string ) {
+        if ( $search_string ) {
 
-            $result = $this->get_rows_count_cat_search($category_id,
-                                                       $search_string);
+            $result = $this->get_rows_count_search($search_string);
 
         } elseif ( $category_id ) {
 
             $result = $this->get_rows_count_cat($category_id);
-
-        } elseif ( $search_string ) {
-
-            $result = $this->get_rows_count_search($search_string);
 
         } else {
 
@@ -62,30 +57,10 @@ class Paginator
         return $result;
     }
 
-    private function get_rows_count_cat_search($category_id, $search_string)
-    {
-        $sql = "SELECT COUNT(*) AS products_count FROM product
-                WHERE category_id = :category_id
-                    AND (cross_code LIKE :search_string
-                    OR firm LIKE :search_string
-                    OR orig_code LIKE :search_string
-                    OR name LIKE :search_string
-                    OR characteristic LIKE :search_string)";
-
-        $sth = $this->dbh->prepare($sql);
-        $sth->execute(array(
-            ":category_id"   => $category_id,
-            ":search_string" => "%" . $search_string . "%"
-        ));
-
-        $result = $sth->fetch();
-        return $result["products_count"];
-    }
-
     private function get_rows_count_cat($category_id)
     {
         $sql = "SELECT COUNT(*) AS products_count FROM product
-                WHERE category_id = :category_id";
+                WHERE quantity!=0 AND category_id = :category_id";
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute(array(":category_id" => $category_id));
@@ -97,7 +72,7 @@ class Paginator
     private function get_rows_count_search($search_string)
     {
         $sql = "SELECT COUNT(*) AS products_count FROM product
-                WHERE cross_code LIKE :search_string
+                WHERE quantity!=0 AND cross_code LIKE :search_string
                     OR firm LIKE :search_string
                     OR orig_code LIKE :search_string
                     OR name LIKE :search_string
@@ -112,7 +87,7 @@ class Paginator
 
     private function get_rows_count()
     {
-        $sql = "SELECT COUNT(*) AS products_count FROM product";
+        $sql = "SELECT COUNT(*) AS products_count FROM product WHERE quantity!=0";
 
         $sth = $this->dbh->prepare($sql);
         $sth->execute();
