@@ -15,10 +15,6 @@ require_once SCL_LIB_DIR . "Autoloader.php";
 $loader = new \SCL\lib\Autoloader();
 $loader->register();
 
-// var_dump($_POST);
-// var_dump($_FILES);
-// exit;
-
 $core = new \SCL\Controller\Core();
 
 $result = $core->init();
