@@ -168,11 +168,6 @@ $( document ).ready(function() {
         $( "#scl-pagination" ).width( scrWidth );
     }
 
-    function setFooterSize(scrWidth, footerHeight) {
-        $( "#scl-footer" ).height( footerHeight );
-        $( "#scl-footer" ).width( scrWidth );
-    }
-
     function setTradePosition(scrHeight, scrWidth) {
         var tradeHeight = $( "#scl-product-trade .wrapper" ).height();
         var tradeWidth  = $( "#scl-product-trade .wrapper" ).width();
@@ -211,15 +206,13 @@ $( document ).ready(function() {
         var scrWidth  = screen.width;
 
         var headerHeight = 75,
-            paginationHeight = 27,
-            footerHeight = 40;
+            paginationHeight = 27;
 
-        var helpersHeight = headerHeight + paginationHeight + footerHeight;
+        var helpersHeight = headerHeight + paginationHeight;
 
         setHeaderSize(scrWidth, headerHeight);
         setProductsSize(scrHeight, scrWidth, helpersHeight);
         setPaginationSize(scrWidth, paginationHeight);
-        setFooterSize(scrWidth, footerHeight);
         setTradePosition(scrHeight, scrWidth);
         setProductEditPosition(scrHeight, scrWidth);
         setProductDeletePosition(scrHeight, scrWidth);

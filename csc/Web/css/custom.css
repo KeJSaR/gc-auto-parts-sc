@@ -475,7 +475,7 @@ height: 60px;
 #scl-pagination {
 position: fixed;
 left: 0;
-bottom: 40px;
+bottom: 0;
 z-index: 49;
 background: #fff;
 height: 27px;
