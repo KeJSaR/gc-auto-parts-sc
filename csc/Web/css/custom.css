@@ -387,8 +387,8 @@ top: 75px;
         }
 
             #scl-product-data td {
-padding: 5px 8px;
-box-sizing: border-box;
+                padding: 15px;
+                box-sizing: border-box;
             }
 
                 #scl-product-data td.scl-prod-id {

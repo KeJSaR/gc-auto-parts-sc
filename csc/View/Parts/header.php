@@ -33,6 +33,5 @@
     <div class="scl-special-border">Категория</div>
     <div>Цена</div>
     <div>Кол.</div>
-    <div>Фото</div>
 <?php endif; ?>
 </div>

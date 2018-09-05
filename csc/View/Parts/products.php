@@ -46,30 +46,6 @@
         $html .= $products[$i]["quantity"];
         $html .= "</td>";
 
-        $image_file = SCL_ROOT_DIR . "Web" . SCL_DS . "pictures" . SCL_DS
-                    . "img_" . $products[$i]["id"] . ".jpg";
-        $image_url  = SCL_URL . "pictures/img_"
-                    . $products[$i]["id"] . ".jpg";
-        $thumb_url  = SCL_URL . "pictures/thumbs/thumb_"
-                    . $products[$i]["id"] . ".jpg";
-
-        if (file_exists($image_file)) {
-            $html .= "<td class=\"scl-prod-image\">"
-                        . "<a class=\"scl-product-link\" "
-                            . "href=\"" . $image_url . "\" "
-                            . "data-lightbox=\"prod-id-"
-                                . $products[$i]["id"] . "\" "
-                            . "data-title=\""
-                                . htmlentities($products[$i]["name"]) . "\" "
-                            . "style=\"background-image: url("
-                                . $thumb_url . ");\">"
-                        . "</a>"
-                    . "</td>";
-        } else {
-            $html .= "<td class=\"scl-prod-image\">"
-                   . "<a class=\"scl-product-link\">X</a></td>";
-        }
-
         $html .= "</tr>";
     }
 ?>
@@ -88,7 +64,6 @@
                 <th>Категория</th>
                 <th>Цена</th>
                 <th>Кол.</th>
-                <th>Фото</th>
             </tr>
         </thead>
         <tbody>
