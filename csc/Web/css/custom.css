@@ -337,14 +337,15 @@ z-index: 10;
     }
 
         #scl-header-bot > div {
-float: left;
-font-size: 12px;
-padding: 6px 8px 5px;
-text-align: center;
-text-transform: lowercase;
-letter-spacing: 0px;
-font-weight: bold;
-box-sizing: border-box;
+            float: left;
+            font-size: 12px;
+            padding: 6px 8px 5px;
+            text-align: center;
+            text-transform: lowercase;
+            letter-spacing: 0px;
+            font-weight: bold;
+            box-sizing: border-box;
+            cursor: default;
         }
 
 #scl-sub-header {
