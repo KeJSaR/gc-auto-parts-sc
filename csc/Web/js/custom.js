@@ -563,15 +563,15 @@ $( document ).ready(function() {
                 categories_set += ' > ' + element;
             }, this);
 
-            $("#scl-product-by-id-wrapper .cross-code").html('<span>Кросс-номер:</span> ' + obj['cross_code']);
+            $("#scl-product-by-id-wrapper .cross-code").html('<span>Кросс-номер:</span> <a href="' + baseUrl + '?s=' + obj['cross_code'] + '">' + obj['cross_code'] + '</a>');
 
-            $("#scl-product-by-id-wrapper .firm").html('<span>Производитель:</span> ' + obj['firm']);
+            $("#scl-product-by-id-wrapper .firm").html('<span>Производитель:</span> <a href="' + baseUrl + '?s=' + obj['firm'] + '">' + obj['firm'] + '</a>');
 
-            $("#scl-product-by-id-wrapper .orig-code").html('<span>Ориг. номер:</span> ' + obj['orig_code']);
+            $("#scl-product-by-id-wrapper .orig-code").html('<span>Ориг. номер:</span> <a href="' + baseUrl + '?s=' + obj['orig_code'] + '">' + obj['orig_code'] + '</a>');
 
-            $("#scl-product-by-id-wrapper .name").html('<span>Наименование:</span> ' + obj['name']);
+            $("#scl-product-by-id-wrapper .name").html('<span>Наименование:</span> <a href="' + baseUrl + '?s=' + obj['name'] + '">' + obj['name'] + '</a>');
 
-            $("#scl-product-by-id-wrapper .characteristic").html('<span>Характеристики:</span> ' + obj['characteristic']);
+            $("#scl-product-by-id-wrapper .characteristic").html('<span>Характеристики:</span> <a href="' + baseUrl + '?s=' + obj['characteristic'] + '">' + obj['characteristic'] + '</a>');
 
             $("#scl-product-by-id-wrapper .category-id").html('<span>Категория:</span> ' + categories_set);
 
@@ -585,6 +585,7 @@ $( document ).ready(function() {
     $("#search-by-id").keyup(function() {
         var id = $(this).val();
         getDataById( id );
+        console.log(baseUrl);
     });
 
     // #####################################################################
