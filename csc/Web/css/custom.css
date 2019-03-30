@@ -1018,7 +1018,6 @@ input:focus,
 }
 
 .type-close,
-#product-edit-close,
 #balance-close
 {
     font-size: 14px;
@@ -1041,8 +1040,6 @@ input:focus,
 
 .type-close:hover,
 .type-close:active,
-#product-edit-close:hover,
-#product-edit-close:active,
 #balance-close:hover,
 #balance-close:active
 {
@@ -1146,6 +1143,7 @@ input:focus,
     border-bottom: 3px solid #26a69a;
 }
 
+#product-edit-close,
 .edit-wrapper .button
 {
     line-height: 36px;
@@ -1153,7 +1151,7 @@ input:focus,
     display: block;
 
     height: 36px;
-    margin: 10px auto 0;
+    margin: 10px;
     padding: 0 2rem;
 
     cursor: pointer;
@@ -1163,18 +1161,36 @@ input:focus,
     letter-spacing: .5px;
     text-transform: uppercase;
 
-    color: #fff;
-    border: none;
+    color: #26a69a;
+    border: 1px solid #26a69a;
     border-radius: 2px;
     outline: 0;
-    background-color: #26a69a;
+    background-color: white;
     box-shadow: 0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);
 }
 
-.edit-wrapper .button:hover
+#product-edit-close {
+    height: 34px;
+    color: red;
+    border: 1px solid red;
+}
+
+.edit-wrapper .button:hover,
+#product-edit-close:hover,
+#product-edit-close:active {
+    color: white;
+    box-shadow: 0 3px 3px 0 rgba(0,0,0,.14),0 1px 7px 0 rgba(0,0,0,.12),0 3px 1px -1px rgba(0,0,0,.2);
+}
+
+.edit-wrapper .button:hover,
+.edit-wrapper .button:active
 {
     background-color: #2bbbad;
-    box-shadow: 0 3px 3px 0 rgba(0,0,0,.14),0 1px 7px 0 rgba(0,0,0,.12),0 3px 1px -1px rgba(0,0,0,.2);
+}
+
+#product-edit-close:hover,
+#product-edit-close:active {
+    background-color: red;
 }
 
 #new-optgroup
@@ -1216,6 +1232,11 @@ input:focus,
 #goods-old
 {
     display: none;
+}
+
+.edit-wrapper .submit-block {
+    display: flex;
+    justify-content: center;
 }
 
 .edit-wrapper .row

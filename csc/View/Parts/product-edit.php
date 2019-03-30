@@ -39,8 +39,6 @@
 ?>
 <div class="edit-wrapper">
 
-  <div id="product-edit-close">X</div>
-
   <h2></h2>
 
   <form action="<?php echo $trade_href; ?>" method="post" enctype="multipart/form-data">
@@ -154,7 +152,10 @@
 
     </fieldset>
 
-    <input id="submit-goods" class="button" type="submit" value="Отправить">
+    <div class="submit-block">
+      <div id="product-edit-close" class="reject">Отменить</div>
+      <input id="submit-goods" class="button" type="submit" value="Добавить">
+    </div>
 
   </form>
 
