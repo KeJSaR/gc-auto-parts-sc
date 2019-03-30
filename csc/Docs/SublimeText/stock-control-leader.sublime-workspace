@@ -1,0 +1,321 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+			[
+				"var",
+				"var_dump〔function〕"
+			],
+			[
+				"action",
+				"action_data"
+			],
+			[
+				"cat",
+				"categoryId"
+			],
+			[
+				"f",
+				"fixed"
+			],
+			[
+				"fon",
+				"font-size"
+			],
+			[
+				"wid",
+				"width"
+			],
+			[
+				"text",
+				"text-align"
+			],
+			[
+				"tr",
+				"transparent"
+			],
+			[
+				"co",
+				"color"
+			],
+			[
+				"ba",
+				"background-color"
+			]
+		]
+	},
+	"buffers":
+	[
+	],
+	"build_system": "",
+	"build_system_choices":
+	[
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 375.0,
+		"last_filter": "menu",
+		"selected_items":
+		[
+			[
+				"menu",
+				"View: Toggle Menu"
+			],
+			[
+				"packin",
+				"Package Control: Install Package"
+			]
+		],
+		"width": 450.0
+	},
+	"console":
+	{
+		"height": 389.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = 'df21e130d211cfc94d9b0905775a7c0f' + '1e3d39e33b79698005270310898eea76'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Constantine/OneDrive/Work/Projects/csc/lider/code"
+	],
+	"file_history":
+	[
+		"/C/xampp/apache/conf/extra/httpd-vhosts.conf",
+		"/C/xampp/php/php.ini",
+		"/C/Users/Constantine/OneDrive/Work/Projects/csc/kysil/v.2.0/code/info.php",
+		"/C/Users/Constantine/OneDrive/Work/Projects/csc/kysil/v.1.0/code/.htaccess",
+		"/C/Users/Constantine/OneDrive/Work/Projects/csc/lider/code/Docs/SublimeText/stock-control-leader.sublime-project",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/Web/css/custom.css",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/Classes/Auth.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/Web/js/custom.js",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/View/Parts/footer.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/View/Parts/products.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/View/Parts/header.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/Classes/Show.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/Controller/Core.php",
+		"/C/Users/KeJSaR/Downloads/eve_sczii.txt",
+		"/F/Untitled Document 1",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/View/Pages/main.php",
+		"/C/Users/KeJSaR/Downloads/eve.txt",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/View/Parts/categories.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/Classes/Checks/CheckAction.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/Lib/Paginator.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/View/Parts/scripts.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/SCL/View/Parts/head.php",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/stock-control.zone/view/js/names.js",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/stock-control.zone/view/js/main.js",
+		"/C/Users/KeJSaR/OneDrive/Work/Projects/stock-control.zone/view/js/script.js",
+		"/C/Users/KeJSaR/Downloads/Backup 12 18 2016/artezian.info/public_html/admin/lib/admin_db_conn.php",
+		"/C/Users/KeJSaR/Downloads/Backup 12 18 2016/artezian.info/public_html/config/config.php",
+		"/C/Users/KeJSaR/Downloads/Backup 12 18 2016/artezian.info/public_html/.htaccess",
+		"/C/Users/KeJSaR/OneDrive/Work/Archive/rezerv 3 Dec 2016/vs_artezian.sql",
+		"/C/Users/KeJSaR/Downloads/Backup 12 18 2016/edelweis.in.ua/public_html/19-ekonom-razmeshchenie-v-gostevom-dome-edelvejs.html",
+		"/C/Users/KeJSaR/Downloads/Backup 12 18 2016/edelweis.in.ua/public_html/default.html",
+		"/C/Users/KeJSaR/Downloads/Backup 12 18 2016/edelweis.in.ua/public_html/img_001.php",
+		"/C/Users/KeJSaR/Documents/NetSarang/Xftp/Temporary/index.php",
+		"/C/Users/KeJSaR/AppData/Roaming/Sublime Text 3/Packages/SublimeLinter/Default (Windows).sublime-keymap",
+		"/C/Users/KeJSaR/AppData/Roaming/Sublime Text 3/Packages/User/SublimeLinter.sublime-settings"
+	],
+	"find":
+	{
+		"height": 27.0
+	},
+	"find_in_files":
+	{
+		"height": 0.0,
+		"where_history":
+		[
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"    $(",
+			"The_",
+			"system",
+			"The",
+			"system",
+			"search_href",
+			"return",
+			"}\n\nfunction ",
+			"empty_mess",
+			"=",
+			"notaro",
+			"=\n\n",
+			"Mitchin",
+			"Jimbo",
+			"req_params();",
+			"' ORDER BY ' . $this->order;\n\n        $sql .= ' LIMIT '  . $this->paginator_data['limit_data']['limit']\n              . ' OFFSET ' . $this->paginator_data['limit_data']['offset'];",
+			"sql",
+			";\n        if ( $this->action_data['ob'] ) {\n            switch ($this->action_data['ob']) {\n                case '0':\n                    $sql .= 'code';\n                    break;\n\n                case '1':\n                    $sql .= 'name';\n                    break;\n\n                case '2':\n                    $sql .= 'characteristic';\n                    break;\n\n                case '3':\n                    $sql .= 'price';\n                    break;\n\n                default:\n                    $sql .= 'name ASC, price DESC';\n                    break;\n            }\n            if ( $this->action_data['o'] ) {\n                switch ($this->action_data['o']) {\n                    case 'a':\n                        $sql .= ' ASC';\n                        break;\n\n                    case 'd':\n                        $sql .= ' DESC';\n                        break;\n\n                    default:\n                        $sql .= ' ASC';\n                        break;\n                }\n            }\n        } else {\n            $sql .= 'name ASC, price DESC';\n        }",
+			"sql",
+			"$limit  =",
+			". $offset;",
+			". $limit .",
+			"paginator_data",
+			"$paginator_data",
+			"($paginator_data)",
+			"request_products",
+			"req_products",
+			"get_current_page_products",
+			"_products",
+			"result",
+			"rows_per_page",
+			"}",
+			"} ",
+			"get_rows_per_page",
+			"by_",
+			"get_rows_count",
+			"action_types",
+			"var",
+			"user_data",
+			"td",
+			"scl-products",
+			".",
+			"#",
+			"index",
+			"option",
+			"th",
+			"nav",
+			"function",
+			"products",
+			"scrSize",
+			"Screen",
+			"screen",
+			"getScreenSize()",
+			"next",
+			"aptop",
+			"apache",
+			"default",
+			"archeo-news.ru",
+			"vs_artezian",
+			"vs_",
+			"novootradnoe.com",
+			"kejsar.ru",
+			"egia-nea.ru",
+			"edelweis.in.ua",
+			"artezian.info",
+			"archeo-news.ru",
+			"example.com",
+			"sudo mkdir -p",
+			"var"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"sheets":
+			[
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 27.0
+	},
+	"input":
+	{
+		"height": 37.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": false,
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"pinned_build_system": "",
+	"project": "stock-control-leader.sublime-project",
+	"replace":
+	{
+		"height": 50.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 239.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}

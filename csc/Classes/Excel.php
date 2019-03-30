@@ -31,9 +31,9 @@ class Excel
     private function get_products()
     {
         if ( $this->category_id ) {
-            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price, place FROM product WHERE category_id = :category_id AND quantity > 0 ORDER BY name";
+            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price, place FROM product WHERE category_id = :category_id AND quantity > 0 ORDER BY id";
         } else {
-            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price, place FROM product WHERE quantity > 0 ORDER BY name";
+            $sql = "SELECT id, firm, cross_code, name, characteristic, quantity, price, place FROM product WHERE quantity > 0 ORDER BY id";
         }
 
         $sth = $this->dbh->prepare($sql);
